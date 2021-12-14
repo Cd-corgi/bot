@@ -36,7 +36,7 @@ module.exports = {
 
         /*vars*/
         const chan = interaction.options.getChannel("channel");
-        const txt = interaction.options.getString("message") || `{user}! Welcome to ${interaction.guild.id}`;
+        const txt = interaction.options.getString("message") || `{user}! Welcome to ${interaction.guild.name}`;
 
         if(choice === "set") {
             wel.findOne({ guildID: interaction.guild.id, channelID: chan.id }, (err, data) => {
@@ -76,8 +76,6 @@ module.exports = {
                     })
                 } else {
                     wel.deleteOne({ guildID: interaction.guild.id })
-                    wel.save();
-
                     interaction.reply({
                         content: "Welcome message have been Disabled!",
                         ephemeral: true
