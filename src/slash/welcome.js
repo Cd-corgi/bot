@@ -59,7 +59,7 @@ module.exports = {
                     }).then(setTimeout(() => interaction.deleteReply(), 5000))
                     return;
                 } else {
-                    wel.updateOne({guildID: interaction.guild.id, channelID: chan.id, welMessage: txt})
+                    wel.updateOne({channelID: chan.id, welMessage: txt})
                     wel.save()
                     return;
                 }
@@ -67,7 +67,7 @@ module.exports = {
 
 
         } else if(choice === "clear") {
-            wel.findOne({ guildID: interaction.guild.id }, (err, data) => {
+            wel.findOne({ guildID: interaction.guild.id }, async (err, data) => {
                 if(err) throw err;
                 if(!data) {
                     interaction.reply({
@@ -77,7 +77,7 @@ module.exports = {
                     return;
                 }
                 
-                wel.deleteOne({ guildID: interaction.guild.id })
+                await wel.deleteOne({ guildID: interaction.guild.id })
                     interaction.reply({
                         content: "Welcome message have been Disabled!",
                         ephemeral: true
