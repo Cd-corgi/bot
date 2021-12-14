@@ -76,7 +76,7 @@ module.exports = {
                     })
                 } else {
                     wel.deleteOne({ guildID: interaction.guild.id })
-                    await wel.save();
+                    wel.save();
 
                     interaction.reply({
                         content: "Welcome message have been Disabled!",
