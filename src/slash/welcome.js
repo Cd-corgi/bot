@@ -74,13 +74,15 @@ module.exports = {
                         content: "This guild have not a welcome channel yet",
                         ephemeral: true
                     })
-                } else {
-                    await wel.deleteOne({ guildID: interaction.guild.id })
+                    return;
+                }
+                
+                await wel.deleteOne({ guildID: interaction.guild.id })
                     interaction.reply({
                         content: "Welcome message have been Disabled!",
                         ephemeral: true
-                    })
-                }
+                })
+                
             }) 
         }
     }
