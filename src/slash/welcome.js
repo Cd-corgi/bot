@@ -75,7 +75,7 @@ module.exports = {
                         ephemeral: true
                     })
                 } else {
-                    wel.deleteOne({ guildID: interaction.guild.id })
+                    await wel.deleteOne({ guildID: interaction.guild.id })
                     interaction.reply({
                         content: "Welcome message have been Disabled!",
                         ephemeral: true
