@@ -170,4 +170,4 @@ for(const file of readdirSync('./distube_events/')) {
 
 client.login(token).catch(error => {
     console.log(`${error}`.red);
-}); //a
+});
