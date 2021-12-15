@@ -14,17 +14,10 @@ module.exports = {
             .setDescription(`The majority of the commands are built in \`/\` Commands!\n**They has several ways to use them!**\n > **Alterative functions!**\n>\`/\`warnings <add/check/remove>`)
             .setColor("YELLOW")
 
-        const cms = fs.readdir('../slash/').filter(f => f.endsWith('.js'))
-
-        for (const f of cms) {
-
-            let cmdS = require(`../slash/${f}`);
-
-            const Mod = new MessageEmbed()
-                .setTitle(`Bunny Hops\' Help Menu!`)
-                .setDescription(client.slashCommands.map(z => `\`/${z.data.name}\``).join("\n"))
-                .setColor("PINK")
-        }
+        const Mod = new MessageEmbed()
+            .setTitle(`Bunny Hops\' Help Menu!`)
+            .setDescription(client.slashCommands.map(z => `\`/${z.data.name}\``).join("\n"))
+            .setColor("PINK")
 
         const button1 = new MessageButton()
                 .setCustomId('previousbtn')
