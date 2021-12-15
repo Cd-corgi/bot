@@ -39,6 +39,8 @@ module.exports = {
             button2
         ]
 
+        let timeout = 120000;
+
         paginationembed(interaction, pages, buttonList, tiemout)
     }
 }
