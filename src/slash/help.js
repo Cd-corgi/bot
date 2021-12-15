@@ -17,7 +17,7 @@ module.exports = {
         const Mod = new MessageEmbed()
             .setTitle(`Bunny Hops\' Help Menu!`)
             .setDescription(client.slashCommands.map(z => `\`/${z.data.name}\``).join("\n"))
-            .setColor("PINK")
+            .setColor("RANDOM")
 
         const button1 = new MessageButton()
                 .setCustomId('previousbtn')
