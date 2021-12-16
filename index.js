@@ -127,10 +127,13 @@ client.on("messageCreate", async(message) => {
         .setDescription(`You just mentioned me! theres my main information!`)
         .setThumbnail(client.user.displayAvatarURL())
         .addField("Owner", `<@${ownerID}>`, true)
-        .addField("Prefix", `\`${prefix}\` <t:1651294800:R> will be replaced with \`/\``)
+        .addField("Prefix", `\`${prefix}\` <t:1651294800:R> will be replaced with \`/\``, true)
+        .addField("Powered with", "Node.js V16.x (JavaScript)", true)
+        .setColor("LUMINOUS_VIVID_PINK")
 
         const cmdembed = new Discord.MessageEmbed()
         .setThumbnail(client.user.displayAvatarURL())
+        .setColor("LUMINOUS_VIVID_PINK")
         .addField("Commands", `\`${sscmdss.join("\` \`")}\``)
         message.channel.send({
             embeds: [embeds],
