@@ -130,9 +130,43 @@ client.on("messageCreate", async(message) => {
         .addField("Prefix", `\`${prefix}\` <t:1651294800:R> will be replaced with \`/\``)
 
         const cmdembed = new Discord.MessageEmbed()
+        .setThumbnail(client.user.displayAvatarURL())
         .addField("Commands", `\`${sscmdss.join("\` \`")}\``)
         message.channel.send({
-            embeds: [embeds]
+            embeds: [embeds],
+            components: [
+                new Discord.MessageActionRow()
+                .addComponents(
+                    new Discord.MessageSelectMenu()
+                    .setCustomId("m1")
+                    .setPlaceholder("Use me to reveal my commands!")
+                    .addOptions([
+                        {
+                            label: "Info",
+                            description: "About my prefix and more!",
+                            value: "main",
+                            emoji: "🐰"
+                        },
+                        {
+                            label: "Commands",
+                            description: "Show the existing Commands!",
+                            value: "cmds",
+                            emoji: "📌"
+                        }
+                    ])
+                )
+            ]
+        }).then(async (m) => {
+            const collector = m.createMessageComponentCollector({filter: i => i.user.id === message.author.id});
+
+            collector.on("collect", async (i) => {
+                if(i.values[0] === "main") {
+                    i.update({embeds: [embeds]})
+                }
+                if(i.values[0] === "cmds") {
+                    i.update({embeds: [cmdembed]})
+                }
+            })
         })
     }
     if(!message.content.startsWith(prefix)) return;
