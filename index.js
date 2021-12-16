@@ -105,7 +105,7 @@ client.on("messageCreate", async(message) => {
             .setAuthor(message.author.tag)
             .setTitle("[:x: ANTI-SCAM] - NO SCAM LINKS")
             .setColor("RED")
-            message.author.send({ //hola
+            message.author.send({ 
                 embeds: [embed]
             })
         }
