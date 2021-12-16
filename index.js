@@ -123,7 +123,7 @@ client.on("messageCreate", async(message) => {
         }
         const embeds = new Discord.MessageEmbed()
         .setTitle("My Commands")
-        .setDescription(`\`${sscmdss.join("\`, ")}`)
+        .setDescription(`\`${sscmdss.join("\`, \`")}`)
         message.channel.send({
             embeds: [embeds]
         })
