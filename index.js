@@ -1,5 +1,6 @@
 const Discord = require("discord.js")
 const client = new Discord.Client({
+    partials: ["CHANNEL", "MESSAGE", "GUILD_MEMBER"],
     intents: 32767,
     allowedMentions: false
 });
@@ -109,6 +110,21 @@ client.on("messageCreate", async(message) => {
         }
    }
 
+    if(message.channel.partial) await message.channel.fetch();
+    if(message.partial) await message.fetch();
+    if(message.mentions.has(client.user)) {
+        const sscmdss = [];
+
+        let gg = readdirSync('./src/slash/').filter(file => file.endsWith('.js'));
+
+        for(const file of gg) {
+            let gag = require(`./src/slash/${file}`);
+            sscmdss.push(gag.data.name);
+            console.log(sscmdss.join("\n"))
+        }
+
+        message.channel.send("Check console ...")
+    }
     if(!message.content.startsWith(prefix)) return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
