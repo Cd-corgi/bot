@@ -127,7 +127,9 @@ client.on("messageCreate", async(message) => {
         .setDescription(`You just mentioned me! theres my main information!`)
         .setThumbnail(client.user.displayAvatarURL())
         .addField("Owner", `<@${ownerID}>`, true)
-        .addField("Prefix", `\`${prefix}\` in <t:1651294800:R> will be replaced with \`/\``)
+        .addField("Prefix", `\`${prefix}\` <t:1651294800:R> will be replaced with \`/\``)
+
+        const cmdembed = new Discord.MessageEmbed()
         .addField("Commands", `\`${sscmdss.join("\` \`")}\``)
         message.channel.send({
             embeds: [embeds]
