@@ -112,7 +112,7 @@ client.on("messageCreate", async(message) => {
 
     if(message.channel.partial) await message.channel.fetch();
     if(message.partial) await message.fetch();
-    if(message.mentions.has(client.user)) {
+    if(message.content === `<@!${client.user.id}>` || message.content === `<@${client.user.id}>`) {
         const sscmdss = [];
 
         let gg = readdirSync('./src/slash/').filter(file => file.endsWith('.js'));
