@@ -10,11 +10,11 @@ module.exports = {
     async run(client, interaction){
         var cmds = [];
 
-        let scmd = fs.readdirSync('../slash').filter(file => file.endsWith('.js'));
+        let scmd = fs.readdirSync('../../src/slash').filter(file => file.endsWith('.js'));
 
         for(const file of scmd) {
             
-            let com = require(`../slash/${file}`);
+            let com = require(`../../src/slash/${file}`);
             cmds.push(com.toString());
             console.log(cmds.join("\n"))
         }
