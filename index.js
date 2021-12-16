@@ -120,10 +120,13 @@ client.on("messageCreate", async(message) => {
         for(const file of gg) {
             let gag = require(`./src/slash/${file}`);
             sscmdss.push(gag.data.name);
-            console.log(sscmdss.join("\n"))
         }
-
-        message.channel.send("Check console ...")
+        const embeds = new Discord.MessageEmbed()
+        .setTitle("My Commands")
+        .setDescription(`\`${sscmdss.join("\n")}\``)
+        message.channel.send({
+            embeds: [embeds]
+        })
     }
     if(!message.content.startsWith(prefix)) return;
 
