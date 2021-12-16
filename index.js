@@ -9,7 +9,8 @@ require('./src/utils/mongo')();
 
 const { token } = require("./src/public/config.json");
 const scam = require('./src/public/scam.json')
-
+const { ownerID } = require('./src/public/config.json');
+const { prefix } = require('./src/public/config.json');
 
 
 
@@ -123,7 +124,11 @@ client.on("messageCreate", async(message) => {
         }
         const embeds = new Discord.MessageEmbed()
         .setTitle("My Commands")
-        .setDescription(`\`${sscmdss.join("\` \`")}\``)
+        .setDescription(`You just mentioned me! theres my main information!`)
+        .setThumbnail(client.user.displayAvatarURL())
+        .addField("Owner", `<@${ownerID}>`, true)
+        .addField("Prefix", `\`${prefix}\` in <t:1651294800:R> will be replaced with \`/\``)
+        .addField("Commands", `\`${sscmdss.join("\` \`")}\``)
         message.channel.send({
             embeds: [embeds]
         })
