@@ -14,7 +14,7 @@ module.exports = {
 
         for(const file of scmd) {
             
-            let com = fs.readdirSync(`../slash/${file}`);
+            let com = require(`../slash/${file}`);
             cmds.push(com.toString());
             console.log(cmds.join("\n"))
         }
