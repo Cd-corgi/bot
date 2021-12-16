@@ -6,19 +6,8 @@ const fs = require('fs')
 module.exports = {
     data: new SlashCommandBuilder()
     .setName("help")
-    .setDescription("it shows yuosome advices about the commands"),
+    .setDescription("it shows you some advices about the commands"),
     async run(client, interaction){
-        var cmds = [];
-
-        let scmd = fs.readdirSync('../../src/slash/').filter(file => file.endsWith('.js'));
-
-        for(const file of scmd) {
-            
-            let com = require(`../../src/slash/${file}`);
-            cmds.push(com.toString());
-            console.log(cmds.join("\n"))
-        }
-
         
     }
 }
