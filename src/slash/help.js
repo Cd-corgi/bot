@@ -10,7 +10,7 @@ module.exports = {
     async run(client, interaction){
         var cmds = [];
 
-        let scmd = fs.readdirSync('../../src/slash').filter(file => file.endsWith('.js'));
+        let scmd = fs.readdirSync('../../src/slash/').filter(file => file.endsWith('.js'));
 
         for(const file of scmd) {
             
