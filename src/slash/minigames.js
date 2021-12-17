@@ -49,7 +49,7 @@ module.exports = {
                     validate: null
                 }),
                 headers: {
-                    "Authorization": `Bot${token}`,
+                    "Authorization": `Bot ${token}`,
                     "Content-Type": "application/json"
                 }
             }).then(res => res.json())
