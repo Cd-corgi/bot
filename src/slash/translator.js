@@ -28,6 +28,14 @@ module.exports = {
             .setDescription("Inster the text to translate!")
             .setRequired(true)
         )
+        .addStringOption(option =>
+            option
+            .setName("visibility")
+            .setDescription("choose one to show to the public or only for you!")
+            .addChoice("public", "public")
+            .addChoice("me", "me")
+            .setRequired(true)
+        )
     ),
     async run(client, interaction){
 
@@ -42,8 +50,9 @@ module.exports = {
             })
             return;
         } else if(interaction.options.getSubcommand() === "translate") {
-            const lang = interaction.options.getString("language")
-            const text = interaction.options.getString("text")
+            const lang = interaction.options.getString("language");
+            const text = interaction.options.getString("text");
+            const view = interaction.options.getString("visibility");
 
             if(lang.length > 3) return interaction.reply({
                 content: "I allow a maximum of 2 letters to detect the language",
@@ -55,23 +64,42 @@ module.exports = {
                 ephemeral: true
             })
 
-            translate(`${text}`, {to: lang}).then(res => {
-                const trad = new MessageEmbed()
-                .setTitle("Translator!")
-                .setDescription(`Translate to \`${lang}\``)
-                .setColor("RANDOM")
-                .addField("Original Text", `\`\`\`${text}\`\`\``)
-                .addField("Translated Text", `\`\`\`${res.text}\`\`\``)
-
-                interaction.reply({
-                    embeds: [trad],
-                    ephemeral: true
-                })
-            }).catch(e => {
-                interaction.reply({
-                    content: `:x: | Error: ${e}`
+            if(view === "me") {
+                translate(`${text}`, {to: lang}).then(res => {
+                    const trad = new MessageEmbed()
+                    .setTitle("Translator!")
+                    .setDescription(`Translate to \`${lang}\``)
+                    .setColor("RANDOM")
+                    .addField("Original Text", `\`\`\`${text}\`\`\``)
+                    .addField("Translated Text", `\`\`\`${res.text}\`\`\``)
+    
+                    interaction.reply({
+                        embeds: [trad],
+                        ephemeral: true
+                    })
+                }).catch(e => {
+                    interaction.reply({
+                        content: `:x: | Error: ${e}`
+                    }) 
                 }) 
-            }) 
+            } else if(view === "public") {
+                translate(`${text}`, {to: lang}).then(res => {
+                    const trad = new MessageEmbed()
+                    .setTitle("Translator!")
+                    .setDescription(`Translate to \`${lang}\``)
+                    .setColor("RANDOM")
+                    .addField("Original Text", `\`\`\`${text}\`\`\``)
+                    .addField("Translated Text", `\`\`\`${res.text}\`\`\``)
+    
+                    interaction.reply({
+                        embeds: [trad]
+                    })
+                }).catch(e => {
+                    interaction.reply({
+                        content: `:x: | Error: ${e}`
+                    }) 
+                }) 
+            }
         }
     }
 }

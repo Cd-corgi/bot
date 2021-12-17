@@ -28,7 +28,7 @@ async function createSlash() {
                 body: commands
             }
         ) 
-        console.log("[/] Slahs Commands have been added!".yellow)
+        console.log("[/] Slash Commands have been added!".yellow)
     }catch(error) {
        console.log(`[❌] ERROR: ${error}`.red)     
     }
