@@ -61,9 +61,10 @@ module.exports = {
                 const ytmbed = new MessageEmbed()
                 .setTitle("YouTube Together")
                 .setThumbnail("https://media.giphy.com/media/13Nc3xlO1kGg3S/giphy.gif")
-                .setDescription(`Press the Link to join\n\n[> Click here <](https://discord.com/invite/${invite.code})`)
+                .setDescription(`Press the Link to join`)
 
                 interaction.reply({
+                    content: `https://discord.com/invite/${invite.code}`,
                     embeds: [ytmbed]
                 })
 
