@@ -185,8 +185,6 @@ client.on("messageCreate", async(message) => {
         message.channel.send("Unknown Command ...")
     }
 
-    //anti-scam
-
 
 });
 
