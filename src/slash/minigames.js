@@ -15,17 +15,17 @@ module.exports = {
         )
         .addSubcommand(subCommand =>
             subCommand
-                .setTitle("betrayal")
+                .setName("betrayal")
                 .setDescription("Who\'s the betrayer? let\'s see!")
         )
         .addSubcommand(subCommand =>
             subCommand
-                .setTitle("poker")
+                .setName("poker")
                 .setDescription("♦ Let\'s see how your money gone from your wallet")
         )
         .addSubcommand(subCommand =>
             subCommand
-                .setTitle("fishing")
+                .setName("fishing")
                 .setDescription("🐟 Catch that big fish to your lunch!")
         ),
     async run(client, interaction) {
