@@ -36,7 +36,7 @@ module.exports = {
 
         /*vars*/
         const chan = interaction.options.getChannel("channel");
-        const txt = interaction.options.getString("message") || `{user}! Welcome to ${interaction.guild.name}`;
+        const txt = interaction.options.getString("message");
 
         if(choice === "set") {
             wel.findOne({ guildID: interaction.guild.id, channelID: chan.id }, async (err, data) => {
@@ -60,6 +60,7 @@ module.exports = {
                     return;
                 } else {
                     wel.updateOne({channelID: chan.id, welMessage: txt})
+                    interaction.reply("Updated!")
                     return;
                 }
             })
