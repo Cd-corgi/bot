@@ -63,8 +63,7 @@ module.exports = {
             let alr = await wel.findOne({ guildID: interaction.guild.id, channelID: chan.id, welMessage: txt });
 
             if(alr) {
-                alr.updateOne({ channelID: chan.id, welMessage: txt })
-                await alr.save();
+                await alr.updateOne({ channelID: chan.id, welMessage: txt })
                 interaction.reply("The welcome message have been modified!")
                 return;
             }
