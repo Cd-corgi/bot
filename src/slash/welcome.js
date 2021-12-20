@@ -46,8 +46,7 @@ module.exports = {
                         guildID: interaction.guild.id,
                         channelID: chan.id,
                         welMessage: txt
-                    })
-                    data.save();
+                    }).save();
                     
                     const setted = new MessageEmbed()
                     .setTitle("Welcome system")
@@ -59,8 +58,7 @@ module.exports = {
                     }).then(setTimeout(() => interaction.deleteReply(), 5000))
                     return;
                 } else {
-                    wel.updateOne({channelID: chan.id, welMessage: txt})
-                    await wel.save();
+                    wel.updateOne({channelID: chan.id, welMessage: txt}).save();
                     return interaction.reply("Updated!");
                 }
             })

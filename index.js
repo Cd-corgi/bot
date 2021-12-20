@@ -93,7 +93,7 @@ client.on("guildMemberAdd", async(member, guild) => {
             return;
         } else {
             const chan = member.guild.channels.cache.get(data.channelID);
-            const msg = data.welMessage;
+            const msg = data.welMessage || `Welcome to ${member.guild.id}, ${member.user}`;
 
             const wembed = new Discord.MessageEmbed()
             .setTitle(`Welcome ${member.user.tag} to ${member.guild.name}`)
