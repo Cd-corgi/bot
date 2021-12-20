@@ -60,8 +60,8 @@ module.exports = {
                     return;
                 } else {
                     wel.updateOne({channelID: chan.id, welMessage: txt})
-                    interaction.reply("Updated!")
-                    return;
+                    await wel.save();
+                    return interaction.reply("Updated!");
                 }
             })
 
