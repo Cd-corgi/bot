@@ -96,7 +96,7 @@ client.on("guildMemberAdd", async(member, guild) => {
             const msg = data.welMessage;
 
             const wembed = new Discord.MessageEmbed()
-            .setTitle(`Welcome ${member.user} to ${member.guild.name}`)
+            .setTitle(`Welcome ${member.user.tag} to ${member.guild.name}`)
             .setColor("RANDOM")
             .setDescription(`${msg}`)
             .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
