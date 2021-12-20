@@ -60,7 +60,7 @@ module.exports = {
                     return;
                 } else {
                     wel.updateOne({channelID: chan.id, welMessage: txt})
-                    wel.save()
+                    await wel.save()
                     return;
                 }
             })
