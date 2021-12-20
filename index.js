@@ -95,11 +95,8 @@ client.on("guildMemberAdd", async(member, guild) => {
             const chan = member.guild.channels.cache.get(data.channelID);
             const msg = data.welMessage;
 
-            if(msg.includes("{user}")) msg = msg.replace('{user}', `${member.user}`)
-            if(msg.includes("{guild}")) msg = msg.replace('{user}', `${member.guild.name}`)
-
             const wembed = new Discord.MessageEmbed()
-            .setTitle(`Welcome ${member.user}`)
+            .setTitle(`Welcome ${member.user} to ${member.guild.name}`)
             .setColor("RANDOM")
             .setDescription(`${msg}`)
             .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
