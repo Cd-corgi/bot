@@ -11,6 +11,7 @@ const { token } = require("./src/public/config.json");
 const scam = require('./src/public/scam.json')
 const { ownerID } = require('./src/public/config.json');
 const { prefix } = require('./src/public/config.json');
+const WSchema = require('./src/models/welcome')
 
 
 
@@ -85,7 +86,28 @@ client.on("interactionCreate", async(interaction) => {
 });
 
 
-//a
+client.on("guildMemberAdd", async(member, guild) => {
+    WSchema.findOne({ guildID: member.guild.id }, async (err, data) => {
+        if(err) throw err;
+        if(!data) {
+            return;
+        } else {
+            const chan = member.guild.channels.cache.get(data.channelID);
+            const msg = data.welMessage;
+
+            if(msg.content.includes("{user}")) msg = msg.replace('{user}', `${member.user}`)
+            if(msg.content.includes("{guild}")) msg = msg.replace('{user}', `${member.guild.name}`)
+
+            const wembed = new Discord.MessageEmbed()
+            .setTitle(`Welcome ${member.user}`)
+            .setColor("RANDOM")
+            .setDescription(`${msg}`)
+            .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
+
+            chan.send({embeds: [wembed]})
+        }
+    })
+})
 
 //#endregion event handler
 
