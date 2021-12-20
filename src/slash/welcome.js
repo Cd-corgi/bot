@@ -39,7 +39,7 @@ module.exports = {
         const txt = interaction.options.getString("message") || `{user}! Welcome to ${interaction.guild.name}`;
 
         if(choice === "set") {
-            wel.findOne({ guildID: interaction.guild.id, channelID: chan.id }, (err, data) => {
+            wel.findOne({ guildID: interaction.guild.id, channelID: chan.id }, async (err, data) => {
                 if(err) throw err;
                 if(!data) {
                     data = new wel({
