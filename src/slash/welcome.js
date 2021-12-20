@@ -60,7 +60,7 @@ module.exports = {
                 }
             })
 
-            let alr = await wel.findOne({ guildID: interaction.guild.id, channelID: chan.id, welMessage: txt });
+            let alr = await wel.findOne({ guildID: interaction.guild.id });
 
             if(alr) {
                 await alr.updateOne({ channelID: chan.id, welMessage: txt })
