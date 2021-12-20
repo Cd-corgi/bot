@@ -215,6 +215,7 @@ client.distube.on("searchResult", (message, result) => {
 })
 client.distube.on("error", (textChannel, e) => {
     textChannel.send({content: `:x: | Error: ${e}`})
+    console.log(e);
 })
 
 for(const file of readdirSync('./distube_events/')) {
