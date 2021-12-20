@@ -57,11 +57,17 @@ module.exports = {
                         embeds: [setted]
                     }).then(setTimeout(() => interaction.deleteReply(), 5000))
                     return;
-                } else {
-                    wel.updateOne({channelID: chan.id, welMessage: txt}).save();
-                    return interaction.reply("Updated!");
                 }
             })
+
+            let alr = await wel.findOne({ guildID: interaction.guild.id, channelID: chan.id, welMessage: txt });
+
+            if(alr) {
+                alr.updateOne({ channelID: chan.id, welMessage: txt })
+                await alr.save();
+                interaction.reply("The welcome message have been modified!")
+                return;
+            }
 
 
         } else if(choice === "clear") {
