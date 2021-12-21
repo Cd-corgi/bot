@@ -73,7 +73,7 @@ module.exports = {
 
             interaction.reply({
                 embeds: [warembed]
-            })
+            }) //a
 
         } else if(choice === "list") {
 
