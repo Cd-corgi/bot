@@ -9,7 +9,7 @@
     "colors": "^1.4.0",
     "common-tags": "^1.8.2",
     "discord-api-types": "^0.25.2",
-    "discord.js": "^13.3.1",
+    "discord.js": "^13.4.0",
     "discordjs-button-pagination": "^2.0.1",
     "distube": "^3.0.4",
     "ffmpeg-static": "^4.4.0",
