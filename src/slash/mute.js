@@ -38,6 +38,6 @@ module.exports = {
 
         member.timeout(timeoutMs, Reason)
 
-        interaction.reply(`${user.user.username} have been muted!`)
+        interaction.reply(`<@${user.id}> have been muted!`)
     }
 }
