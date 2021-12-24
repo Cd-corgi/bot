@@ -25,7 +25,7 @@ module.exports = {
         .setDescription("Provice the reason of the mute!")
         .setRequired(false)
     ),
-    async run(client, interaction){
+    async run(client, interaction){ //a
         const user = interaction.options.getUser("user");
         const duration = interaction.options.getString("length");
         const Reason = interaction.options.getString("reason") || "Without Reason";
