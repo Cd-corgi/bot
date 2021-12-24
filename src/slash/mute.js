@@ -30,6 +30,25 @@ module.exports = {
         const duration = interaction.options.getString("length");
         const Reason = interaction.options.getString("reason") || "Without Reason";
 
+        var bperms =  interaction.guild.me.permissions.has("MANAGE_CHANNELS")
+        var perms =  interaction.guild.member.permissions.has("MANAGE_CHANNELS")
+
+        if(!perms) {
+            interaction.reply({
+                content: 'You can\'t use this command without "\`MANAGE_CHANNELS\`" permissions!',
+                ephemeral: true
+            })
+            return;
+        }
+
+        if(!bperms) {
+            interaction.reply({
+                content: 'I have not the \`MANAGE_CHANNELS\` permissions! Contant the mods/admins to provide me the permission!',
+                ephemeral: true
+            })
+            return;
+        }
+
         const member = interaction.guild.members.cache.get(user.id);
 
         const timeoutMs = ms(duration);
