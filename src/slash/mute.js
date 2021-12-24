@@ -36,7 +36,7 @@ module.exports = {
 
         if(!timeoutMs) return interaction.reply("Specify a valid time!")
 
-        member.timeout(timeoutMs, Reason)
+        user.user.timeout(timeoutMs, Reason)
 
         interaction.reply(`${member.username} have been muted!`)
     }
