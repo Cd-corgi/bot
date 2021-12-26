@@ -251,6 +251,9 @@ for(const file of readdirSync('./distube_events/')) {
 const userSpam = new Map();
 
 client.on("messageCreate", async(message) => {
+
+    let usera = message.author;
+
     if(userSpam.has(message.author.id)) {
         const userData = userSpam.get(message.author.id);
         let {msgCount} = userData;
@@ -262,12 +265,12 @@ client.on("messageCreate", async(message) => {
 
         if(msgCount >= 3) {
             message.delete();
-            message.channel.send("[ANTI-SPAM] No spam Please!")
         } 
         
-        if(msgCount === 5) {
+        if(msgCount >= 5) {
             message.delete();
-            message.author.timeout(900000, "Spamming");
+            usera.timeout(15*60*1000, "Spamming");
+            message.channel.send("[ANTI SPAM] "+ usera.username + " have been muted! by spam!")
         }
 
         setTimeout(() => {
