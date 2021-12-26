@@ -18,7 +18,7 @@ module.exports = {
     .addStringOption(option =>
         option
         .setName("length")
-        .setDescription("Provide how long will last the mute!")
+        .setDescription("provide how long will last! sample (1 day/2 hours/3 minutes)")
         .setRequired(true)
     )
     .addStringOption(option =>
@@ -72,6 +72,15 @@ module.exports = {
 
         await member.timeout(parsedTime, Reason)
 
-        interaction.reply(`<@${user.id}> Has been Muted for about **${prettyMs(parsedTime, {verbose: true})}**`)
+        // interaction.reply(`<@${user.id}> Has been Muted for about **${prettyMs(parsedTime, {verbose: true})}**`)
+
+        const tt = new MessageEmbed()
+        .setTitle(`${user.username} has been Muted!`)
+        .setDescription(`**Reason:** \`${Reason}\`\n**Duration:** \`${prettyMs(parsedTime, {verbose: true})}\``)
+        .setColor("RED")
+
+        interaction.reply({
+            embeds: [tt]
+        }).then(() => setTimeout(() => interaction.deleteReply(), 10000))
     }
 }
