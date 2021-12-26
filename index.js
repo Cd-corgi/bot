@@ -270,7 +270,13 @@ client.on("messageCreate", async(message) => {
         if(msgCount >= 5) {
             message.delete();
             message.guild.members.cache.find(m => m.id === usera.id).timeout(15*60*1000, "Spamming messages!")
-            message.channel.send("[ANTI SPAM] "+ usera.username + " have been muted! by spam!")
+            const stoo = new Discord.MessageEmbed()
+            .setTitle(`[ANTI-SPAM] ${usera.username} has been muted!`)
+            .setDescription(`Reason: \`Spam\`\nTimeout: \`15 Minutes\``)
+            
+            message.channel.send({
+                embeds: [stoo]
+            })
         }
 
         setTimeout(() => {
