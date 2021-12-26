@@ -20,8 +20,8 @@ module.exports = {
 
         const state = interaction.options.getString("status")
 
-        var perms = interaction.member.premissions.has("MODERATE_MEMBERS");
-        var bperms = interaction.member.premissions.has("MODERATE_MEMBERS");
+        var perms = interaction.member.permissions.has("MODERATE_MEMBERS");
+        var bperms = interaction.guild.me.permissions.has("MODERATE_MEMBERS");
 
         if(!perms) {
             interaction.reply({
