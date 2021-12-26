@@ -32,7 +32,7 @@ module.exports = {
         const Reason = interaction.options.getString("reason") || "Without Reason";
 
         var bperms =  interaction.guild.me.permissions.has("MANAGE_CHANNELS")
-        var perms =  interaction.guild.member.permissions.has("MANAGE_CHANNELS")
+        var perms =  interaction.member.permissions.has("MANAGE_CHANNELS")
 
         if(!perms) {
             interaction.reply({
