@@ -263,7 +263,9 @@ client.on("messageCreate", async(message) => {
         if(msgCount >= 3) {
             message.delete();
             message.channel.send("[ANTI-SPAM] No spam Please!")
-        } else if(msgCount === 5) {
+        } 
+        
+        if(msgCount === 5) {
             message.delete();
             message.guild.member(message.author.id).timeout(900000, "Spamming");
         }
