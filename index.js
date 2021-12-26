@@ -253,7 +253,7 @@ const userSpam = new Map();
 
 client.on("messageCreate", async (message) => {
 
-    Nospam.findOne({ guildID: messasge.guild.id }, async(err, data) => {
+    Nospam.findOne({ guildID: message.guild.id }, async(err, data) => {
         if(err) throw err;
         if(data){
 
