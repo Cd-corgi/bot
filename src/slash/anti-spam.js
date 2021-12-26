@@ -40,27 +40,29 @@ module.exports = {
         }
 
         if(state === "on") {
-            let there = NoSpam.findOne({ guildID: interaction.guild.id });
+            
+            NoSpam.findOne({ guildID: interaction.guild.id }, async(err, data) => {
+                if(err) throw err;
+                if(data) {
+                    interaction.reply({
+                        content: "`This function is already Enabled`",
+                        ephemeral: true
+                    })
+                    return;
+                } else {
+                    data = new NoSpam({
+                        guildID: interaction.guild.id
+                    }).save();
 
-            if(there){ 
-                interaction.reply({
-                    content: "`This function is already enabled`",
-                    ephemeral: true
-                })
-                return;
-            } else {
-                new NoSpam({
-                    guildID: interaction.guild.id
-                }).save();
+                    const enn = new MessageEmbed()
+                    .setTitle("✅ Anti-Spam Enabled!")
+                    .setColor("GREEN")
 
-                const enn = new MessageEmbed()
-                .setTitle("✅ Anti-Spam Enabled")
-                .setColor("GREEN")
-
-                interaction.reply({
-                    embeds: [enn]
-                }).then(() => setTimeout(() => interaction.deleteReply(), 15000))
-            }
+                    interaction.reply({
+                        embeds: [enn]
+                    }).then(() => setTimeout(() => interaction.deleteReply(), 15000))
+                }
+            })
 
         } else if(state === "off") {
             let del = NoSpam.findOne({ guildID: interaction.guild.id });
