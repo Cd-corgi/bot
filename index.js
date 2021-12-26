@@ -12,6 +12,7 @@ const scam = require('./src/public/scam.json')
 const { ownerID } = require('./src/public/config.json');
 const { prefix } = require('./src/public/config.json');
 const WSchema = require('./src/models/welcome')
+const Nospam = require('./src/models/anti-spam')
 
 
 
