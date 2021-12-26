@@ -1,6 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 const Discord = require('discord.js');
+const parseTime = require('parse-duration');
+const prettyMs = require('pretty-ms');
 const ms = require('ms');
 
 module.exports = {
@@ -27,7 +29,6 @@ module.exports = {
     ),
     async run(client, interaction){ //a
         const user = interaction.options.getUser("user");
-        const duration = interaction.options.getString("length");
         const Reason = interaction.options.getString("reason") || "Without Reason";
 
         var bperms =  interaction.guild.me.permissions.has("MANAGE_CHANNELS")
@@ -49,14 +50,32 @@ module.exports = {
             return;
         }
 
+
         const member = interaction.guild.members.cache.get(user.id);
 
-        const timeoutMs = ms(duration);
+        if(!user.user.moderatable) return interaction.reply({
+            content: 'This user can\'t be applied the timeout!',
+            ephemeral: true
+        })
 
-        if(!timeoutMs) return interaction.reply("Specify a valid time!")
+        const duration = interaction.options.getString("length");
 
-        member.timeout(timeoutMs, Reason)
+        if(!duration) return interaction.reply({
+            content: 'Specify the time!',
+            ephemeral: true
+        })
 
-        interaction.reply(`<@${user.id}> have been muted!`)
+        let parsedTime = parseTime(duration);
+
+        if(parsedTime < ms("1m") || parsedTime > ms("28d")) {
+            return interaction.reply({
+                content: 'The provided duration is out of my range!',
+                ephemeral: true
+            })
+        }
+
+        await member.timeout(timeoutMs, Reason)
+
+        interaction.reply(`<@${user.id}> Has been Muted for about **${prettyMs(parsedTime, {verbose: true})}**`)
     }
 }
