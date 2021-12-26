@@ -65,23 +65,24 @@ module.exports = {
             })
 
         } else if(state === "off") {
-            let del = NoSpam.findOne({ guildID: interaction.guild.id });
-
-            if(!del) {
+           NoSpam.findOne({ guildID: interaction.guild.id }, async(err, data) => {
+               if(err) throw err;
+               if(!data) {
                 interaction.reply({
-                    content: '`This function is already Disabled`',
+                    content: "`This function is already Disabled`",
                     ephemeral: true
                 })
-            } else {
-                await del.deleteOne({ guildID: interaction.guild.id });
-                const des = new MessageEmbed()
-                .setTitle("✅ Anti-Spam Disabled")
-                .setColor("RED")
-
-                interaction.reply({
-                    embeds: [des]
-                }).then(() => setTimeout(() => interaction.deleteReply(), 15000))
-            }
+                return;
+               } else {
+                   await NoSpam.deleteOne({ guildID: interaction.guild.id })
+                   const des = new MessageEmbed()
+                   .setTitle("✅ Anti-Spam Disabled!")
+                   .setColor("RED")
+                   interaction.reply({
+                       embeds: [des]
+                   })
+               }
+           })
         }
     }
-} //a
+}
