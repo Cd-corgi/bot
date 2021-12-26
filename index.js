@@ -275,7 +275,6 @@ client.on("messageCreate", async(message) => {
 
         setTimeout(() => {
             userSpam.delete(message.author.id);
-            console.log("Cooldown removed!")
         }, 10000)
 
     } else {
