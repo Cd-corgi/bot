@@ -53,10 +53,6 @@ module.exports = {
 
         const member = interaction.guild.members.cache.get(user.id);
 
-        if(!user.user.moderatable) return interaction.reply({
-            content: 'This user can\'t be applied the timeout!',
-            ephemeral: true
-        })
 
         const duration = interaction.options.getString("length");
 
