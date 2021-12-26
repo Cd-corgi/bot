@@ -253,41 +253,41 @@ const userSpam = new Map();
 
 client.on("messageCreate", async (message) => {
 
-    Nospam.findOne({ guildID: message.guild.id }, async(err, data) => {
-        if(err) throw err;
-        if(data){
+    Nospam.findOne({ guildID: message.guild.id }, async (err, data) => {
+        if (err) throw err;
+        if (data) {
 
             let usera = message.author;
-    
+
             if (userSpam.has(message.author.id)) {
                 const userData = userSpam.get(message.author.id);
                 let { msgCount } = userData;
-    
+
                 msgCount += 1;
-    
+
                 userData.msgCount = msgCount;
                 userSpam.set(message.author.id, userData);
-    
+
                 if (msgCount >= 3) {
                     message.delete();
                 }
-    
+
                 if (msgCount >= 5) {
                     message.delete();
                     message.guild.members.cache.find(m => m.id === usera.id).timeout(15 * 60 * 1000, "Spamming messages!")
                     const stoo = new Discord.MessageEmbed()
                         .setTitle(`[ANTI-SPAM] ${usera.username} has been muted!`)
                         .setDescription(`Reason: \`Spam\`\nTimeout: \`15 Minutes\``)
-    
+
                     message.channel.send({
                         embeds: [stoo]
                     })
                 }
-    
+
                 setTimeout(() => {
                     userSpam.delete(message.author.id);
                 }, 10000)
-    
+
             } else {
                 userSpam.set(message.author.id, {
                     msgCount: 1
@@ -297,7 +297,7 @@ client.on("messageCreate", async (message) => {
                     console.log("Cooldown removed!")
                 }, 10000)
             }
-    
+
         } else {
             return;
         }
