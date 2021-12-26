@@ -268,6 +268,11 @@ client.on("messageCreate", async(message) => {
             message.guild.member(message.author.id).timeout(900000, "Spamming");
         }
 
+        setTimeout(() => {
+            userSpam.delete(message.author.id);
+            console.log("Cooldown removed!")
+        }, 10000)
+
     } else {
         userSpam.set(message.author.id, {
             msgCount: 1
