@@ -269,7 +269,7 @@ client.on("messageCreate", async(message) => {
         
         if(msgCount >= 5) {
             message.delete();
-            message.guild.member(usera.id).timeout(15*60*1000, "Spamming");
+            message.guild.members.cache.find(m => m.id === usera.id).timeout(15*60*1000, "Spamming messages!")
             message.channel.send("[ANTI SPAM] "+ usera.username + " have been muted! by spam!")
         }
 
