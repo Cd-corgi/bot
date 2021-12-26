@@ -267,7 +267,7 @@ client.on("messageCreate", async(message) => {
         
         if(msgCount === 5) {
             message.delete();
-            message.guild.member(message.author.id).timeout(900000, "Spamming");
+            message.author.timeout(900000, "Spamming");
         }
 
         setTimeout(() => {
