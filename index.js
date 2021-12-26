@@ -247,7 +247,38 @@ for(const file of readdirSync('./distube_events/')) {
 
 //#endregion distube core
 
+//#region anti-spam timeout
+const userSpam = new Map();
 
+client.on("messageCreate", async(message) => {
+    if(userSpam.has(message.author.id)) {
+        const userData = userSpam.get(message.author.id);
+        let {msgCount} = userData;
+
+        msgCount += 1;
+
+        userData.msgCount = msgCount;
+        userSpam.set(message.author.id, userData);
+
+        if(msgCount >= 3) {
+            message.delete();
+            message.channel.send("[ANTI-SPAM] No spam Please!")
+        } else if(msgCount === 5) {
+            message.delete();
+            message.guild.member(message.author.id).timeout(900000, "Spamming");
+        }
+
+    } else {
+        userSpam.set(message.author.id, {
+            msgCount: 1
+        })
+        setTimeout(() => {
+            userSpam.delete(message.author.id);
+            console.log("Cooldown removed!")
+        }, 10000)
+    }
+})
+//#endregion anti-spam timeout
 
 client.login(token).catch(error => {
     console.log(`${error}`.red);
