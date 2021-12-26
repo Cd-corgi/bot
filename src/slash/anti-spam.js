@@ -42,12 +42,13 @@ module.exports = {
         if(state === "on") {
             let there = NoSpam.findOne({ guildID: interaction.guild.id });
 
-            if(there) return interaction.reply({
-                content: "`This function is already enabled`",
-                ephemeral: true
-            });
-
-            if(!there) {
+            if(there){ 
+                interaction.reply({
+                    content: "`This function is already enabled`",
+                    ephemeral: true
+                })
+                return;
+            } else {
                 new NoSpam({
                     guildID: interaction.guild.id
                 }).save();
