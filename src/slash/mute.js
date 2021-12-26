@@ -70,7 +70,7 @@ module.exports = {
             })
         }
 
-        await member.timeout(timeoutMs, Reason)
+        await member.timeout(parsedTime, Reason)
 
         interaction.reply(`<@${user.id}> Has been Muted for about **${prettyMs(parsedTime, {verbose: true})}**`)
     }
