@@ -113,6 +113,29 @@ client.on("guildMemberAdd", async (member, guild) => {
 
 client.on("messageCreate", async (message) => {
 
+    let asp = "";
+    let wel = "";
+
+    //#region check anti-spam
+        Nospam.findOne({ guildID: message.guild.id }, async(err, data) => {
+            if(err) throw err;
+            if(data) {
+                asp = "Enabled"
+            } else {
+                asp = "Disabled"
+            }
+        })
+        
+        WSchema.findOne({ guildID: message.guild.id }, async(err, data) => {
+            if(err) throw err;
+            if(data) {
+                wel = "Enabled"
+            } else {
+                wel = "Disabled"
+            }
+        })
+    //#endregion check anti-spam
+
     if (message.author.bot) return;
     if (message.channel.type == "dm" || !message.guild) return;
 
@@ -143,7 +166,7 @@ client.on("messageCreate", async (message) => {
             sscmdss.push(gag.data.name);
         }
         const embeds = new Discord.MessageEmbed()
-            .setTitle("My Commands")
+            .setTitle(`${client.user.username}\'s info`)
             .setDescription(`You just mentioned me! theres my main information!`)
             .setThumbnail(client.user.displayAvatarURL())
             .addField("Owner", `<@${ownerID}>`, true)
@@ -152,9 +175,16 @@ client.on("messageCreate", async (message) => {
             .setColor("LUMINOUS_VIVID_PINK")
 
         const cmdembed = new Discord.MessageEmbed()
+            .setTitle("Commands")
             .setThumbnail(client.user.displayAvatarURL())
             .setColor("LUMINOUS_VIVID_PINK")
             .addField("Commands", `\`${sscmdss.join("\` \`")}\``)
+
+        const settings = new Discord.MessageEmbeds()
+            .setTitle(`${message.guild.name}\'s Settings`)
+            .setColor("GREEN")
+            .addField("💬 Anti-Spam", `\`${as}\``, true)
+            .addField("🐰 Welcome System", `\`${wel}\``, true)
         message.channel.send({
             embeds: [embeds],
             components: [
@@ -175,6 +205,12 @@ client.on("messageCreate", async (message) => {
                                     description: "Show the existing Commands!",
                                     value: "cmds",
                                     emoji: "📌"
+                                },
+                                {
+                                    label: "Settings",
+                                    description: "Check the Guild\'s settings",
+                                    value: "state",
+                                    emoji: "⚙"
                                 }
                             ])
                     )
@@ -188,6 +224,9 @@ client.on("messageCreate", async (message) => {
                 }
                 if (i.values[0] === "cmds") {
                     i.update({ embeds: [cmdembed] })
+                }
+                if(i.values[0] === "state") {
+                    i.update({ embeds: [settings] })
                 }
             })
         })
