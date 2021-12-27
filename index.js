@@ -113,8 +113,8 @@ client.on("guildMemberAdd", async (member, guild) => {
 
 client.on("messageCreate", async (message) => {
 
-    let asp = " ";
-    let wel = " ";
+    let asp = " "
+    let wel = " "
 
     //#region check anti-spam
         let sp = NoSpam.findOne({ guildID: message.guild.id })
