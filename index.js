@@ -117,23 +117,20 @@ client.on("messageCreate", async (message) => {
     let wel = " ";
 
     //#region check anti-spam
-        Nospam.findOne({ guildID: message.guild.id }, async(err, data) => {
-            if(err) throw err;
-            if(data) {
-                asp = "Enabled"
-            } else {
-                asp = "Disabled"
-            }
-        })
-        
-        WSchema.findOne({ guildID: message.guild.id }, async(err, data) => {
-            if(err) throw err;
-            if(data) {
-                wel = "Enabled"
-            } else {
-                wel = "Disabled"
-            }
-        })
+        let sp = NoSpam.findOne({ guildID: message.guild.id })
+        let wels = WSchema.findOne({ guidID: message.guild.id })
+
+        if(sp) {
+            asp = "Enabled"
+        } else {
+            asp = "Disabled"
+        }
+
+        if(wels) {
+            wel = "Enabled"
+        } else {
+            wel = "Disabled"
+        }
     //#endregion check anti-spam
 
     if (message.author.bot) return;
