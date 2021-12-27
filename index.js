@@ -180,7 +180,7 @@ client.on("messageCreate", async (message) => {
             .setColor("LUMINOUS_VIVID_PINK")
             .addField("Commands", `\`${sscmdss.join("\` \`")}\``)
 
-        const settings = new Discord.MessageEmbeds()
+        const settings = new Discord.MessageEmbed()
             .setTitle(`${message.guild.name}\'s Settings`)
             .setColor("GREEN")
             .addField("💬 Anti-Spam", `\`${as}\``, true)
