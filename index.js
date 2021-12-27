@@ -117,8 +117,8 @@ client.on("messageCreate", async (message) => {
     let wel = " "
 
     //#region check anti-spam
-        let sp = Nospam.findOne({ guildID: message.guild.id })
-        let wels = WSchema.findOne({ guidID: message.guild.id })
+        let sp = await Nospam.findOne({ guildID: message.guild.id }) || "Disabled"
+        let wels = await WSchema.findOne({ guidID: message.guild.id }) || "Disabled"
 
         if(sp) {
             asp = "Enabled"
