@@ -183,7 +183,7 @@ client.on("messageCreate", async (message) => {
         const settings = new Discord.MessageEmbed()
             .setTitle(`${message.guild.name}\'s Settings`)
             .setColor("GREEN")
-            .addField("💬 Anti-Spam", `\`${as}\``, true)
+            .addField("💬 Anti-Spam", `\`${asp}\``, true)
             .addField("🐰 Welcome System", `\`${wel}\``, true)
         message.channel.send({
             embeds: [embeds],
