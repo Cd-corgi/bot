@@ -113,25 +113,6 @@ client.on("guildMemberAdd", async (member, guild) => {
 
 client.on("messageCreate", async (message) => {
 
-    let asp = " "
-    let wel = " "
-
-    //#region check anti-spam
-        let sp = await Nospam.findOne({ guildID: message.guild.id }) || "Disabled"
-        let wels = await WSchema.findOne({ guidID: message.guild.id }) || "Disabled"
-
-        if(sp) {
-            asp = "Enabled"
-        } else {
-            asp = "Disabled"
-        }
-
-        if(wels) {
-            wel = "Enabled"
-        } else {
-            wel = "Disabled"
-        }
-    //#endregion check anti-spam
 
     if (message.author.bot) return;
     if (message.channel.type == "dm" || !message.guild) return;
@@ -177,11 +158,6 @@ client.on("messageCreate", async (message) => {
             .setColor("LUMINOUS_VIVID_PINK")
             .addField("Commands", `\`${sscmdss.join("\` \`")}\``)
 
-        const settings = new Discord.MessageEmbed()
-            .setTitle(`${message.guild.name}\'s Settings`)
-            .setColor("GREEN")
-            .addField("💬 Anti-Spam", `\`${asp}\``, true)
-            .addField("🐰 Welcome System", `\`${wel}\``, true)
         message.channel.send({
             embeds: [embeds],
             components: [
@@ -202,12 +178,6 @@ client.on("messageCreate", async (message) => {
                                     description: "Show the existing Commands!",
                                     value: "cmds",
                                     emoji: "📌"
-                                },
-                                {
-                                    label: "Settings",
-                                    description: "Check the Guild\'s settings",
-                                    value: "state",
-                                    emoji: "⚙"
                                 }
                             ])
                     )
@@ -221,9 +191,6 @@ client.on("messageCreate", async (message) => {
                 }
                 if (i.values[0] === "cmds") {
                     i.update({ embeds: [cmdembed] })
-                }
-                if(i.values[0] === "state") {
-                    i.update({ embeds: [settings] })
                 }
             })
         })
