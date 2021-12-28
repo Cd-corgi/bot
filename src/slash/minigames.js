@@ -30,6 +30,9 @@ module.exports = {
         ),
     async run(client, interaction) {
         const chan = interaction.member.voice;
+        let returnData = {
+            code: 'none',
+        }
 
         if (!chan) return interaction.reply({
             content: "You should be in a Voice Channel!"
@@ -54,9 +57,12 @@ module.exports = {
                 }
             }).then(res => res.json())
             .then(invite => {
-                if(!invite.code) return interaction.reply({
+                if(!invite.code || invite.error) return interaction.reply({
                     content: ':x: I cannot start the application!'
                 })
+
+                if(Number(invite.code) === 50013) return console.warn("bot permissions error")
+                returnData.code = `https://discord.com/invite/${invite.code}`; 
 
                 const ytmbed = new MessageEmbed()
                 .setTitle("YouTube Together")
@@ -64,7 +70,7 @@ module.exports = {
                 .setDescription(`Press the Link to join`)
 
                 interaction.reply({
-                    content: `https://discord.com/invite/${invite.code}`,
+                    content: `${returnData.code}`,
                     embeds: [ytmbed]
                 })
 
