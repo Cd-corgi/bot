@@ -9,7 +9,7 @@ require('./src/utils/mongo')();
 
 const { DiscordTogether } = require('discord-together');
 
-client.discordTogeter = new DiscordTogether(client);
+client.discordTogether = new DiscordTogether(client);
 
 const { token } = require("./src/public/config.json");
 const scam = require('./src/public/scam.json')
