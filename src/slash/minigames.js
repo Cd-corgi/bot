@@ -29,10 +29,7 @@ module.exports = {
         ),
     async run(client, interaction) {
         const chan = interaction.member.voice;
-        let returnData = {
-            code: 'none',
-        }
-
+        
         if (!chan) return interaction.reply({
             content: "You should be in a Voice Channel!"
         }).then(setTimeout(() => interaction.deleteReply(), 10000))
@@ -40,7 +37,11 @@ module.exports = {
         const choice = interaction.options.getSubcommand();
 
         if (choice === "youtube") {
-            
+            client.discordTogether.createTogetherCode(interaction.member.voice.channel.id, 'youtube').then(async invite => {
+                return interaction.reply({
+                    content: `${invite.code}`
+                })
+            })
         } else if (choice === "betrayal") {
 
         } else if (choice === "poker") {
