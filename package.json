@@ -5,6 +5,7 @@
   "dependencies": {
     "@discordjs/rest": "^0.1.0-canary.0",
     "@discordjs/voice": "^0.7.5",
+    "@distube/ytdl-core": "^4.9.4",
     "@iamtraction/google-translate": "^1.1.2",
     "colors": "^1.4.0",
     "common-tags": "^1.8.2",

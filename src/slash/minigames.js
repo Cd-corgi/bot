@@ -41,7 +41,7 @@ module.exports = {
                 const ytmbed = new MessageEmbed()
                 .setTitle("YouTube Together")
                 .setThumbnail("https://media.giphy.com/media/13Nc3xlO1kGg3S/giphy.gif")
-                .setDescription(`Enjoy and Share moments with your friends!\n(<Join here>)["${invite.code}"]`)
+                .setDescription(`Enjoy and Share moments with your friends!\n[<Join here>]("${invite.code}")`)
                 
                 return interaction.reply({
                     embeds: [ytmbed]
