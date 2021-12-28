@@ -6,7 +6,7 @@ const { token } = require('../public/config.json')
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("minigames")
-        .setDescription("🎮 Play games in Voice Chat with friends!")
+        .setDescription("🎮 Play and Enjoy activities in Voice Chat with friends!")
         .addSubcommand(subCommand =>
             subCommand
                 .setName("youtube")

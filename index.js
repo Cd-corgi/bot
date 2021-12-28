@@ -7,7 +7,7 @@ const client = new Discord.Client({
 require("colors");
 require('./src/utils/mongo')();
 
-const { DiscordTogether } = require('discord-together');
+const { DiscordTogether } = require('discord-together')
 
 client.discordTogether = new DiscordTogether(client);
 
