@@ -7,6 +7,10 @@ const client = new Discord.Client({
 require("colors");
 require('./src/utils/mongo')();
 
+const { DiscordTogether } = require('discord-together');
+
+client.discordTogeter = new DiscordTogether(client);
+
 const { token } = require("./src/public/config.json");
 const scam = require('./src/public/scam.json')
 const { ownerID } = require('./src/public/config.json');

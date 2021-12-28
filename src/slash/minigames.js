@@ -1,7 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 const Discord = require('discord.js');
-const fetch = require('node-fetch');
 const { token } = require('../public/config.json')
 
 module.exports = {
@@ -41,40 +40,7 @@ module.exports = {
         const choice = interaction.options.getSubcommand();
 
         if (choice === "youtube") {
-            fetch(`https://discord.com/api/v8/channels/${chan.id}/invites`, {
-                method: "POST",
-                body: JSON.stringify({
-                    max_age: 86400,
-                    max__uses: 0,
-                    target_application_id: "755600276941176913",
-                    target_type: 2,
-                    temporary: false,
-                    validate: null
-                }),
-                headers: {
-                    "Authorization": `Bot ${token}`,
-                    "Content-Type": "application/json"
-                }
-            }).then(res => res.json())
-            .then(invite => {
-                if(!invite.code || invite.error) return interaction.reply({
-                    content: ':x: I cannot start the application!'
-                })
-
-                if(Number(invite.code) === 50013) return console.warn("bot permissions error")
-                returnData.code = `https://discord.com/invite/${invite.code}`; 
-
-                const ytmbed = new MessageEmbed()
-                .setTitle("YouTube Together")
-                .setThumbnail("https://media.giphy.com/media/13Nc3xlO1kGg3S/giphy.gif")
-                .setDescription(`Press the Link to join`)
-
-                interaction.reply({
-                    content: `${returnData.code}`,
-                    embeds: [ytmbed]
-                })
-
-            })
+            
         } else if (choice === "betrayal") {
 
         } else if (choice === "poker") {
