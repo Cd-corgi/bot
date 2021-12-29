@@ -48,7 +48,16 @@ module.exports = {
                 })
             })
         } else if (choice === "betrayal") {
+            client.discordTogether.createTogetherCode(interaction.member.voice.channel.id, 'betrayal').then(async invite => {
+                const bet = new MessageEmbed()
+                .setTitle("Betrayal")
+                .setThumbnail("https://media.giphy.com/media/o3OudM1EkO9SiAzo9V/giphy.gif")
+                .setDescription(`Play as a normal member or a betrayer!\n${invite.code}`)
 
+                return interaction.reply({
+                    embeds: [bet]
+                })
+            })
         } else if (choice === "poker") {
 
         } else if (choice === "fishing") {
