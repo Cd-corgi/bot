@@ -75,6 +75,10 @@ module.exports = {
                 .setTitle("Fishing")
                 .setThumbnail("https://media.giphy.com/media/osncBSthuV9fWCHg7B/giphy.gif")
                 .setDescription(`Anyone likes to catch the big fish?\n${invite.code}`)
+
+                return interaction.reply({
+                    embeds: [fis]
+                })
             })
         }
     }
