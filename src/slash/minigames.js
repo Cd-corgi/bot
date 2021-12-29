@@ -59,9 +59,23 @@ module.exports = {
                 })
             })
         } else if (choice === "poker") {
+            client.discordTogether.createTogetherCode(interaction.member.voice.channel.id, 'poker').then(async invite => {
+                const pok = new MessageEmbed()
+                .setTitle("Poker")
+                .setThumbnail("https://media.giphy.com/media/7Mvm1bmTPXnwLcHONE/giphy.gif")
+                .setDescription(`Hmm, try to get the full house!\n${invite.code}`)
 
+                return interaction.reply({
+                    embeds: [pok]
+                })
+            })
         } else if (choice === "fishing") {
-
+            client.discordTogether.createTogetherCode(interaction.member.voice.channel.id, 'fishing').then(async invite => {
+                const fis = new MessageEmbed()
+                .setTitle("Fishing")
+                .setThumbnail("https://media.giphy.com/media/osncBSthuV9fWCHg7B/giphy.gif")
+                .setDescription(`Anyone likes to catch the big fish?\n${invite.code}`)
+            })
         }
     }
 } //a
