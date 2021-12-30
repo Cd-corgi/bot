@@ -241,6 +241,9 @@ client.distube.on("searchResult", (message, result) => {
     message.channel.send(`**Please select one of the listed results!** \n${result.map(song => `**${++i}** - \`${song.name}\` - **${song.formattedDuration}**`).join("\n")}\n**Type anything or wait 30 seconds to cancel**`)
 })
 client.distube.on("searchCancel", message => { message.channel.send("Search Canceled!") })
+client.distube.on("searchInvalidAnswer", message => { message.channel.send("Invalid numer of the song!")})
+client.distube.on("searchNoResult", (query, message) => { message.channel.send(`No results for ${query}`) })
+client.distube.on("searchDone", message => { message.channel.send(`Fetching ...`) })
 client.distube.on("error", (textChannel, e) => {
     textChannel.send({ content: `:x: | Error: ${e}` })
     console.log(e);
