@@ -35,7 +35,7 @@ module.exports = {
             }
         )*/
 
-        interaction.client.distube.search();
+        interaction.client.distube.search(song);
 
         interaction.reply({
             content: "🔍 | Fetching the song ...",
