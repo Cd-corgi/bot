@@ -26,16 +26,14 @@ module.exports = {
             ephemeral: true
         })
 
-        /*interaction.client.distube.playVoiceChannel(
+        interaction.client.distube.playVoiceChannel(
             interaction.member.voice.channel,
             song,
             {
                 textChannel: interaction.channel,
                 member: interaction.member
             }
-        )*/
-
-        interaction.client.distube.search(song);
+        )
 
         interaction.reply({
             content: "🔍 | Fetching the song ...",
