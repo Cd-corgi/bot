@@ -226,7 +226,7 @@ client.distube = new Distube.default(client, {
     leaveOnEmpty: true,
     searchSongs: 10,
     emptyCooldown: 0,
-    plugins: [new SoundCloudPlugin(), new SpotifyPlugin()]
+    // plugins: [new SoundCloudPlugin(), new SpotifyPlugin()]
 });
 
 const fisi = new Discord.MessageEmbed()
