@@ -219,14 +219,14 @@ client.on("messageCreate", async (message) => {
 
 //#region distube core
 const Distube = require('distube')
-const SCPlugin = require('@distube/soundcloud');
-const SpoPlugin = require('@distube/spotify');
+const SoundCloudPlugin  = require('@distube/soundcloud');
+const SpotifyPlugin = require('@distube/spotify');
 client.distube = new Distube.default(client, {
     leaveOnFinish: true,
     leaveOnEmpty: true,
     searchSongs: 10,
     emptyCooldown: 0,
-    plugins: [new SCPlugin(), new SpoPlugin()]
+    plugins: [new SoundCloudPlugin (), new SpotifyPlugin()]
 });
 
 const fisi = new Discord.MessageEmbed()
