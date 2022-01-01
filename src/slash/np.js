@@ -22,7 +22,7 @@ module.exports = {
         .setTitle("🔴 | Now Playing")
         .addField(`**📀 Song:**`, `\`${npp.name}\``, true)
         .addField(`**👤 Resquested by:**`, `${npp.user}`, true)
-        .setDescription(`**▶ Progress:**\n\`${queue.formattedCurrentTime} / ${npp.formattedDuration}\`\n${uni} ${'─'.repeat(part) + '🎶' + '─'.repeat(30 - part)}`)
+        .setDescription(`**▶ Progress:**\n\`${queue.formattedCurrentTime}\` ${'─'.repeat(part) + '🎶' + '─'.repeat(30 - part)} ${npp.formattedDuration}`)
         .setThumbnail(npp.thumbnail)
 
         interaction.reply({
