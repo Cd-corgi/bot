@@ -11,26 +11,11 @@ module.exports = {
         option
         .setName("song")
         .setDescription("provide the song name to extract their lyrics")
-        .setRequired(false)
+        .setRequired(true)
     ),
     async run(client, interaction){
-        
-        const queue = client.distube.getQueue(interaction.member.voice.channel);
 
-        if(!queue) return interaction.reply({
-            content: "No music in the queue ..."
-        })
-
-        if(interaction.guild.me.voice.channel && interaction.member.voice.channel.id !== interaction.guild.me.voice.channel.id) {
-            interaction.reply({
-                content: "Join in the same voice channel to use the command!",
-                ephemeral: true
-            })
-        }
-
-        let CurrentSong = queue.songs[0];
-
-        const query = interaction.options.getString("song") || CurrentSong.name;
+        const query = interaction.options.getString("song");
 
         let lyrics = null;
         
