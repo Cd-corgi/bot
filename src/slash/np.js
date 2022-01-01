@@ -20,9 +20,9 @@ module.exports = {
 
         const np = new MessageEmbed()
         .setTitle("🔴 | Now Playing")
-        .addField(`**📀 Song:**`, `\`${npp.name}\``, true)
+        .addField(`**📀 Song:**`, `\`${npp.name}\` | \`${npp.formattedDuration}\``, true)
         .addField(`**👤 Resquested by:**`, `${npp.user}`, true)
-        .setDescription(`**▶ Progress:**\n\`${queue.formattedCurrentTime}\` ${'─'.repeat(part) + '🎶' + '─'.repeat(30 - part)} ${npp.formattedDuration}`)
+        .setDescription(`**▶ Progress:**\n\`${queue.formattedCurrentTime}\` ${'─'.repeat(part) + '🎶' + '─'.repeat(30 - part)}`)
         .setThumbnail(npp.thumbnail)
 
         interaction.reply({
