@@ -15,9 +15,13 @@ module.exports = {
         })
 
         const npp = queue.songs[0];
+        const uni = `${queue.songs[0].playing ? '⏸ |' : '🔴 |'}`;
+        const part = Math.floor((queue.currentTime / queue.songs[0].duration) * 30);
 
         const np = new MessageEmbed()
-        .setDescription(`Now Playing: \`${npp.name}\`\nDuration: \`${npp.formattedDuration}\`\nRequested by: ${npp.user}`)
+        .addField(`Now Playing:`, `\`${npp.name}\``, true)
+        .addField(`Resquested by:`, `\`${npp.user}\``, true)
+        .setDescription(`Progress:\n\`${queue.formattedCurrentTime} / ${npp.formattedDuration}\`\n\n${uni} ${'─'.repeat(part) + '🎶' + '─'.repeat(30 - part)}`)
         .setThumbnail(npp.thumbnail)
 
         interaction.reply({
