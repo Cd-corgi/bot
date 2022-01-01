@@ -14,7 +14,7 @@ module.exports = {
         .setRequired(false)
     ),
     async run(client, interaction){
-        const query = interaction.options.getString("song");
+        
         const queue = client.distube.getQueue(interaction.member.voice.channel);
 
         if(!queue) return interaction.reply({
@@ -29,7 +29,8 @@ module.exports = {
         }
 
         let CurrentSong = queue.songs[0];
-        if(!query && CurrentSong) query = CurrentSong.name;
+
+        const query = interaction.options.getString("song") || CurrentSong.name;
 
         let lyrics = null;
         
