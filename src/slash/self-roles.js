@@ -127,7 +127,7 @@ module.exports = {
             rows = [new MessageActionRow()], index;
 
             menu.roles.forEach((v, i) => {
-                content += `> ${interaction.guild.emojis.cache.get(v.emoji)?.toString() || v.emoji} : \`${interaction.guild.roles.cache.get(v.rr).name}\`\n\n`
+                content += `> ${interaction.guild.emojis.cache.get(v.emoji)?.toString() || v.emoji} : \`${interaction.guild.roles.cache.get(v.role).name}\`\n\n`
             
                 index = parseInt(i / 5);
                 const button = new MessageButton({
@@ -167,7 +167,7 @@ module.exports = {
 
             if (menu.roles.some(v => v.rr === rr.id) || menu.roles.some(v => v.emoji === emoji.id || v.emoji === emoji.name)) return interaction.editReply({ content: `Reaction Role menu already have either the provided role or the emoji` });
 
-            menu.roles.push({ roles: rr.id, emoji: emoji.id || emoji.name });
+            menu.roles.push({ role: rr.id, emoji: emoji.id || emoji.name });
 
             await self_roles.findOneAndUpdate({ name, guild: interaction.guildId }, { roles: menu.roles });
 
