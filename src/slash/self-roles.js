@@ -165,7 +165,7 @@ module.exports = {
 
             if (!emoji) return interaction.editReply({ content: "You took too much time to respond" });
 
-            if (menu.roles.some(v => v.role === role.id) || menu.roles.some(v => v.emoji === emoji.id || v.emoji === emoji.name)) return interaction.editReply({ content: `Reaction Role menu already have either the provided role or the emoji` });
+            if (menu.roles.some(v => v.rr === rr.id) || menu.roles.some(v => v.emoji === emoji.id || v.emoji === emoji.name)) return interaction.editReply({ content: `Reaction Role menu already have either the provided role or the emoji` });
 
             menu.roles.push({ roles: rr.id, emoji: emoji.id || emoji.name });
 
