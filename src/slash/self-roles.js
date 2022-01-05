@@ -105,4 +105,4 @@ module.exports = {
             interaction.editReply({ content: `The Role menu with the name \`${name}\` have been created!` })
         }
     }
-}
+} //a
