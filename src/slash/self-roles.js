@@ -123,11 +123,11 @@ module.exports = {
                 content: 'This menu have no roles!'
             })
 
-            let content = `Reaction Roles: \`${menu.name}\` \nReact here to get your roles!`,
+            let content = `Reaction Roles: \`${menu.name}\` \nReact here to get your roles!\n`,
             rows = [new MessageActionRow()], index;
 
             menu.roles.forEach((v, i) => {
-                content += `>${interaction.guild.emojis.cache.get(v.emoji)?.toString() || v.emoji} : \`${interaction.guild.roles.cache.get(v.role)}\`\n\n`
+                content += `> ${interaction.guild.emojis.cache.get(v.emoji)?.toString() || v.emoji} : \`${interaction.guild.roles.cache.get(v.rr).name}\`\n\n`
             
                 index = parseInt(i / 5);
                 const button = new MessageButton({
