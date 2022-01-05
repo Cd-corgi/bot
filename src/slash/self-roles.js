@@ -167,7 +167,7 @@ module.exports = {
 
             if (menu.roles.some(v => v.role === role.id) || menu.roles.some(v => v.emoji === emoji.id || v.emoji === emoji.name)) return interaction.editReply({ content: `Reaction Role menu already have either the provided role or the emoji` });
 
-            menu.roles.push({ role: role.id, emoji: emoji.id || emoji.name });
+            menu.roles.push({ roles: rl.id, emoji: emoji.id || emoji.name });
 
             await self_roles.findOneAndUpdate({ name, guild: interaction.guildId }, { roles: menu.roles });
 
