@@ -144,7 +144,7 @@ module.exports = {
 
             await self_roles.findOneAndUpdate({ name, guild: interaction.guild.id }, {msg: msg.id})
 
-            interaction.editReply({ content: "The menu have been started!" })
+            interaction.editReply({ content: "The menu have been started!" }).then(() => setTimeout(() => interaction.deleteReply(), 5000))
         } else
         if(choice === "add-role") {
             if(!menu) return interaction.editReply({ content: `The Reaction Role does not exist! Use an existing one!` })
@@ -173,6 +173,17 @@ module.exports = {
 
             interaction.editReply({ content: `Added role \`${rr.name}\` with emoji : ${emoji.toString()} for menu : \`${menu.name}\`` });
             await msg.delete();
+        } else
+        if(choice === "remove-role") {
+            if(!menu) return interaction.editReply({ content: `The Reaction Role does not exist! Use an existing one!` })
+
+            if (!menu.roles.some(v => v.role === role.id)) return interaction.editReply({ content: `Reaction Role menu do not have this role as its part` });
+
+            menu.roles = menu.roles.filter((v) => v.role !== role.id);
+
+            await self_roles.findOneAndUpdate({ name, guild: interaction.guildId }, { roles: menu.roles });
+
+            interaction.editReply({ content: `Remove role \`${role.name}\`from menu : \`${menu.name}\`` });
         }
     }
 }
