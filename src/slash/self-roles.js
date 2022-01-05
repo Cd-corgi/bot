@@ -30,16 +30,17 @@ module.exports = {
             .setRequired(true)
         )
     )
-    .addSubCommand(subCommand => /* Removerole */
-        subCommand
-        .setName("remove-role")
-        .setDescription("Remove the Self-role in the server!")
-    )
-    .addSubCommand(subCommand => /* Role Panel */
-        subCommand
-        .setName("Panel")
-        .setDescription("Shows the Added roles in the list!")
-    ),
+    // .addSubCommand(subCommand => /* Removerole */
+    //     subCommand
+    //     .setName("remove-role")
+    //     .setDescription("Remove the Self-role in the server!")
+    // )
+    // .addSubCommand(subCommand => /* Role Panel */
+    //     subCommand
+    //     .setName("Panel")
+    //     .setDescription("Shows the Added roles in the list!")
+    // )
+    ,
     async run(client, interaction){
         
         const choice = interaction.options.getSubcommand();
