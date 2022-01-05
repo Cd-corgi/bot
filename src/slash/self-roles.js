@@ -96,7 +96,7 @@ module.exports = {
         if(choice === "create") {
             if(menu) return interaction.editReply({ content: `Reaction Role menu is already existing! Use other different one!` })
 
-            await new menu({
+            await new self_roles({
                 guild: interaction.guild.id,
                 name,
                 message: "0"
