@@ -99,7 +99,7 @@ module.exports = {
             await new self_roles({
                 guild: interaction.guild.id,
                 name,
-                message: "0"
+                msg: "0",
             }).save();
 
             interaction.editReply({ content: `The Role menu with the name \`${name}\` have been created!` })
@@ -113,6 +113,38 @@ module.exports = {
             })
 
             interaction.editReply({ content: `The role with the name \`${name}\` have been removed!` })
+        } else 
+        if(choice === "start") {
+            if(channel.type !== "GUILD_TEXT" && channel.type !== "GUILD_NEWS") return interaction.editReply({
+                content: `An invalid channel was provided!`
+            })
+
+            if(self_roles.roles.length === 0) return interaction.editReply({
+                content: 'This menu have no roles!'
+            })
+
+            let content = `Reaction Roles: \`${menu.name}\` \nReact here to get your roles!`,
+            rows = [new MessageActionRow()], index;
+
+            menu.roles.forEach((v, i) => {
+                content += `>${interaction.guild.emojis.cache.get(v.emoji)?.toString() || v.emoji} : \`${interaction.guild.roles.cache.get(v.role).name}\`\n\n`
+            
+                index = parseInt(i / 5);
+                const button = new MessageButton({
+                    customId: `reaction_role_${i}`,
+                    style: "PRIMARY",
+                    emoji: v.emoji,
+                });
+            
+                rows[index] ? rows[index].addComponents(button) : rows[index] = new MessageActionRow().addComponents(button)
+
+            })
+
+            const msg = await channel.send({ content, components: rows })
+
+            await self_roles.findOneAndUpdate({ name, guild: interaction.guild.id }, {msg: msg.id})
+
+            interaction.editReply({ content: "The menu have been started!" })
         }
     }
-} //a
+}
