@@ -145,6 +145,34 @@ module.exports = {
             await self_roles.findOneAndUpdate({ name, guild: interaction.guild.id }, {msg: msg.id})
 
             interaction.editReply({ content: "The menu have been started!" })
+        } else
+        if(choice === "add-role") {
+            if(!menu) return interaction.editReply({ content: `The Reaction Role does not exist! Use an existing one!` })
+
+            if(role.position >= my_role) return interaction.editReply({ content: `This role is above or is in my role, please put my role above the roles that you want to use it` })
+
+            const msg = await interaction.channel.send({ content: `Please React with the emoji that you want for this role` });
+
+
+            const reactions = await msg.awaitReactions({
+                errors: ["time"],
+                filter: (r, u) => u.id === interaction.user.id,
+                max: 1,
+                time: 300000
+            }).catch(e => { })
+
+            const emoji = reactions.first()?.emoji;
+
+            if (!emoji) return interaction.editReply({ content: "You took too much time to respond" });
+
+            if (menu.roles.some(v => v.role === role.id) || menu.roles.some(v => v.emoji === emoji.id || v.emoji === emoji.name)) return interaction.editReply({ content: `Reaction Role menu already have either the provided role or the emoji` });
+
+            menu.roles.push({ role: role.id, emoji: emoji.id || emoji.name });
+
+            await self_roles.findOneAndUpdate({ name, guild: interaction.guildId }, { roles: menu.roles });
+
+            interaction.editReply({ content: `Added role \`${role.name}\` with emoji : ${emoji.toString()} for menu : \`${menu.name}\`` });
+            await msg.delete();
         }
     }
 }
