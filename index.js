@@ -76,6 +76,24 @@ for (const file of slashCommand) {
 
 client.on("interactionCreate", async (interaction) => {
 
+    if (interaction.isCommand || interaction.isContextMenu) {
+        const slashcmds = client.slashCommands.get(interaction.commandName)
+
+        if (!slashcmds) return;
+
+        try {
+            await slashcmds.run(client, interaction)
+        } catch (error) {
+            console.log(`[❌] ${error}`.red)
+            console.log(error)
+        }
+    }
+
+
+});
+
+client.on("interactionCreate", async(interaction) => {
+    
     if(!interaction.isButton() || !interaction.guild) return;
 
     const emoji = interaction?.component?.emoji;
@@ -106,22 +124,7 @@ client.on("interactionCreate", async (interaction) => {
             })
         } 
     })
-
-    if (interaction.isCommand || interaction.isContextMenu) {
-        const slashcmds = client.slashCommands.get(interaction.commandName)
-
-        if (!slashcmds) return;
-
-        try {
-            await slashcmds.run(client, interaction)
-        } catch (error) {
-            console.log(`[❌] ${error}`.red)
-            console.log(error)
-        }
-    }
-
-
-});
+})
 
 
 client.on("guildMemberAdd", async (member, guild) => {
