@@ -103,6 +103,16 @@ module.exports = {
             }).save();
 
             interaction.editReply({ content: `The Role menu with the name \`${name}\` have been created!` })
+        } else
+        if(choice === "delete") {
+            if(!menu) return interaction.editReply({ content: `The Reaction Role does not exist! Use an existing one!` })
+
+            await self_roles.findOneAndDelete({
+                guild: interaction.guild.id,
+                name,
+            })
+
+            interaction.editReply({ content: `The role with the name \`${name}\` have been removed!` })
         }
     }
 } //a
