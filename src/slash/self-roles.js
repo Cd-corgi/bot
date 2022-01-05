@@ -89,7 +89,7 @@ module.exports = {
         const name = interaction.options.getString("name");
         const emoji = interaction.options.getString("emoji");
         const menu = await self_roles.findOne({ name, guild: interaction.guild.id });
-        const my_role = inteaction.guild.me.roles.highest.position;
+        const my_role = interaction.guild.me.roles.highest.position;
         const rr = interaction.options.getRole("role");
         const channel = interaction.options.getChannel("channel");
 
