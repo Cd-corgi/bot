@@ -119,7 +119,7 @@ module.exports = {
                 content: `An invalid channel was provided!`
             })
 
-            if(self_roles.roles.length === 0) return interaction.editReply({
+            if(menu.roles.length === 0) return interaction.editReply({
                 content: 'This menu have no roles!'
             })
 
