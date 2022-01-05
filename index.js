@@ -103,7 +103,7 @@ client.on("interactionCreate", async(interaction) => {
 
     if (!menu || menu.roles.length === 0 || !menu.roles.some(v => v.emoji === emoji.id || v.emoji === emoji.name)) return;
 
-    const member = interaction.guild.member.cache.get(interaction.user.id);
+    const member = interaction.guild.members.cache.get(interaction.user.id);
 
     menu.roles.forEach(v => {
         const role = interaction.guild.roles.cache.get(v.role);
