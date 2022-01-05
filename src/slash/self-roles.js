@@ -186,4 +186,4 @@ module.exports = {
             interaction.editReply({ content: `Remove role \`${role.name}\`from menu : \`${menu.name}\`` });
         }
     }
-}
+} //a
