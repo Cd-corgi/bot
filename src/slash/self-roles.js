@@ -149,7 +149,7 @@ module.exports = {
         if(choice === "add-role") {
             if(!menu) return interaction.editReply({ content: `The Reaction Role does not exist! Use an existing one!` })
 
-            if(role.position >= my_role) return interaction.editReply({ content: `This role is above or is in my role, please put my role above the roles that you want to use it` })
+            if(rr.position >= my_role) return interaction.editReply({ content: `This role is above or is in my role, please put my role above the roles that you want to use it` })
 
             const msg = await interaction.channel.send({ content: `Please React with the emoji that you want for this role` });
 
