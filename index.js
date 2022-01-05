@@ -16,6 +16,7 @@ const scam = require('./src/public/scam.json')
 const { ownerID } = require('./src/public/config.json');
 const { prefix } = require('./src/public/config.json');
 const WSchema = require('./src/models/welcome')
+const react = require('./src/models/self-roles')
 const Nospam = require('./src/models/anti-spam')
 
 
@@ -74,6 +75,38 @@ for (const file of slashCommand) {
 }
 
 client.on("interactionCreate", async (interaction) => {
+
+    if(!interaction.isButton() || !interaction.guild) return;
+
+    const emoji = interaction?.component?.emoji;
+
+    const menu = await react.findOne({ guild: interaction.guild.id })
+
+
+    if (!menu || menu.roles.length === 0 || !menu.roles.some(v => v.emoji === emoji.id || v.emoji === emoji.name)) return;
+
+    const member = interaction.guild.member.cache.get(interaction.user.id);
+
+    menu.roles.forEach(v => {
+        const role = interaction.guild.roles.cache.get(v.role);
+
+        if ((v.emoji !== emoji.name && v.emoji !== emoji.id)) return;
+
+        if (!member.roles.cache.has(role.id)) {
+            member.roles.add(role).then(() => {
+                interaction.reply({ content: `I gave you the **${role.name}** role in ${interaction.guild.name}`, ephemeral: true })
+            }).catch(() => {
+                interaction.reply({ content: `I was unable to give you the role in ${interaction.guild.name}`, ephemeral: true })
+            })
+        } else {
+            member.roles.remove(role).then(() => {
+                interaction.reply({ content: `I removed the **${role.name}** role from you in ${interaction.guild.name}`, ephemeral: true })
+            }).catch(() => {
+                interaction.reply({ content: `I was unable to remove a role from you in ${interaction.guild.name}`, ephemeral: true })
+            })
+        } 
+    })
+
     if (interaction.isCommand || interaction.isContextMenu) {
         const slashcmds = client.slashCommands.get(interaction.commandName)
 
