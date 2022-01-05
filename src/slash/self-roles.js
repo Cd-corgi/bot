@@ -27,19 +27,9 @@ module.exports = {
             option
             .setName("emoji")
             .setDescription("Give the role an emoji!")
-            .setRequired(true)
+            .setRequired(false)
         )
     )
-    // .addSubCommand(subCommand => /* Removerole */
-    //     subCommand
-    //     .setName("remove-role")
-    //     .setDescription("Remove the Self-role in the server!")
-    // )
-    // .addSubCommand(subCommand => /* Role Panel */
-    //     subCommand
-    //     .setName("Panel")
-    //     .setDescription("Shows the Added roles in the list!")
-    // )
     ,
     async run(client, interaction){
         
@@ -86,4 +76,4 @@ module.exports = {
         }
 
     }
-}
+} //a
