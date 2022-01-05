@@ -56,7 +56,7 @@ module.exports = {
             }
 
             if(guildDAta) {
-                const roleData = guildDAta.roles.find((x) => x.roleID === rl.id)
+                const roleData = guildDAta.Roles.find((x) => x.roleID === rl.id)
 
                 if(roleData) {
                     roleDAta = newRole;
