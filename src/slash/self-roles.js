@@ -96,11 +96,11 @@ module.exports = {
         if(choice === "create") {
             if(menu) return interaction.editReply({ content: `Reaction Role menu is already existing! Use other different one!` })
 
-            await menu.create({
+            await new menu({
                 guild: interaction.guild.id,
                 name,
                 message: "0"
-            })
+            }).save();
 
             interaction.editReply({ content: `The Role menu with the name \`${name}\` have been created!` })
         }
