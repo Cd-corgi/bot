@@ -189,6 +189,7 @@ client.on("messageCreate", async (message) => {
             .setThumbnail(client.user.displayAvatarURL())
             .addField("Owner", `<@${ownerID}>`, true)
             .addField("Prefix", `\`${prefix}\` <t:1651294800:R> will be replaced with \`/\``, true)
+            .addField("Invite this Bot", `[\[Click Here!\]](https://discord.com/api/oauth2/authorize?client_id=915958910022746203&permissions=1240456359638&scope=bot%20applications.commands)`, true)
             .addField("Powered with", "Node.js V16.x (JavaScript)", true)
             .setColor("LUMINOUS_VIVID_PINK")
 
