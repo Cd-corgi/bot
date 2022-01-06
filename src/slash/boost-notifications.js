@@ -24,7 +24,7 @@ module.exports = {
                 )
         ),
     async run(client, interaction) {
-        await interaction.channel.send("Working ...")
+        await interaction.reply("Working ...")
         const choice = interaction.options.getSubcommand();
         const channel = interaction.options.getChannel("channel");
         const bg = await boost.findOne({ guild: interaction.guild.id })
