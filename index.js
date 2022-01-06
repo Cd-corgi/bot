@@ -18,6 +18,7 @@ const { prefix } = require('./src/public/config.json');
 const WSchema = require('./src/models/welcome')
 const react = require('./src/models/self-roles')
 const Nospam = require('./src/models/anti-spam')
+const boost = require('./src/models/boost');
 
 
 
@@ -92,9 +93,9 @@ client.on("interactionCreate", async (interaction) => {
 
 });
 
-client.on("interactionCreate", async(interaction) => {
-    
-    if(!interaction.isButton() || !interaction.guild) return;
+client.on("interactionCreate", async (interaction) => {
+
+    if (!interaction.isButton() || !interaction.guild) return;
 
     const emoji = interaction?.component?.emoji;
 
@@ -122,7 +123,7 @@ client.on("interactionCreate", async(interaction) => {
             }).catch(() => {
                 interaction.reply({ content: `I was unable to remove a role from you in ${interaction.guild.name}`, ephemeral: true })
             })
-        } 
+        }
     })
 })
 
@@ -255,20 +256,36 @@ client.on("messageCreate", async (message) => {
 //#endregion event msg
 
 //#region event detection
-client.on("guildMemberUpdate", (oldMember, newMember) => {
+client.on("guildMemberUpdate", async (oldMember, newMember) => {
     const oldStatus = oldMember.premiumSince;
     const newStatus = newMember.premiumSince;
+    let bg = await boost.findOne({ guild: newMember.guild.id })
+    if (!bg) {
+        return;
+    } else {
+        if (!oldStatus && newStatus) {
 
-    if(!oldStatus && newStatus) {
+            const boosted = new Discord.MessageEmbed()
+            .setTitle(`Server Boosting!`)
+            .setDescription(`Someone super dope like ${newMember.user.username} boosted this server!`)
+            .setImage("https://media.giphy.com/media/oCn6eLwzPmWRdHYHaK/giphy.gif")
+            .setColor("FC33FF")
+            .setTimestamp()
 
+            client.channel.cache.get(boost.channel).send({
+                embeds: [boosted]
+            })
+        } else 
+        if (oldStatus && !newStatus) {
+            client.channel.cache.get(boost.channel).send(`${newMember.user.username} have removed the boost! *sad song*`)
+        }
     }
-
 })
 //#endregion event detenction
 
 //#region distube core
 const Distube = require('distube')
-const SoundCloudPlugin  = require('@distube/soundcloud');
+const SoundCloudPlugin = require('@distube/soundcloud');
 const SpotifyPlugin = require('@distube/spotify');
 client.distube = new Distube.default(client, {
     leaveOnFinish: true,
@@ -292,13 +309,13 @@ client.distube.on("empty", queue => queue.textChannel.send({ embeds: [alone] }))
 client.distube.on("searchResult", (message, result, song, args) => {
     let i = 0
     message.channel.send('Searching...').then(msg => {
-    msg.edit(`**Choose an option from below**\n${result.map(song => `**${++i}**. ${song.name} - \`${song.formattedDuration}\``).join("\n")}\n*Enter anything else or wait 60 seconds to cancel*`).then(msg => {
-        setTimeout(() => msg.delete(), 15000)
-      })
-})
+        msg.edit(`**Choose an option from below**\n${result.map(song => `**${++i}**. ${song.name} - \`${song.formattedDuration}\``).join("\n")}\n*Enter anything else or wait 60 seconds to cancel*`).then(msg => {
+            setTimeout(() => msg.delete(), 15000)
+        })
+    })
 })
 client.distube.on("searchCancel", message => { message.channel.send("Search Canceled!") })
-client.distube.on("searchInvalidAnswer", message => { message.channel.send("Invalid numer of the song!")})
+client.distube.on("searchInvalidAnswer", message => { message.channel.send("Invalid numer of the song!") })
 client.distube.on("searchNoResult", (query, message) => { message.channel.send(`No results for ${query}`) })
 client.distube.on("searchDone", message => { message.channel.send(`Fetching ...`) })
 client.distube.on("error", (textChannel, e) => {
