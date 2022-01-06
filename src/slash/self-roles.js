@@ -88,7 +88,7 @@ module.exports = {
         var perms = interaction.member.permissions.has("MANAGE_ROLES");
         var bperms = interaction.guild.me.permissions.has("MANAGE_ROLES");
 
-        if(!perms) return interaction.editReply({
+    /*    if(!perms) return interaction.editReply({
             content: "You can\'t use this command without \`\"MANAGE_ROLES\"\` permissions!"
         }).then(() => setTimeout(() => interaction.deleteReply(), 5000))
 
@@ -96,6 +96,7 @@ module.exports = {
             content: 'I have not the \`MANAGE_ROLES\` permissions! Contant the mods/admins to provide me the permission!'
         }).then(() => setTimeout(() => interaction.deleteREply(), 5000))
 
+    */    
         const choice = interaction.options.getSubcommand();
         const name = interaction.options.getString("name");
         const emoji = interaction.options.getString("emoji");
