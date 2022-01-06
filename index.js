@@ -257,13 +257,11 @@ client.on("messageCreate", async (message) => {
 
 //#region event detection
 client.on("guildMemberUpdate", async (oldMember, newMember) => {
-    const oldStatus = oldMember.premiumSinceTimestamp
-    const newStatus = newMember.premiumSinceTimestamp;
     let bg = await boost.findOne({ guild: newMember.guild.id })
     if (!bg) {
         return;
     } else {
-        if (!oldStatus && newStatus) {
+        if (!oldMember.premiumSince && newMember.premiumSince) {
 
             const boosted = new Discord.MessageEmbed()
             .setTitle(`Server Boosting!`)
@@ -275,8 +273,8 @@ client.on("guildMemberUpdate", async (oldMember, newMember) => {
             client.channel.cache.get(boost.channel).send({
                 embeds: [boosted]
             })
-        } else 
-        if (oldStatus && !newStatus) {
+        } 
+        if (oldMember.premiumSince && !newMember.premiumSince) {
             client.channel.cache.get(boost.channel).send(`${newMember.user.username} have removed the boost! *sad song*`)
         }
     }
