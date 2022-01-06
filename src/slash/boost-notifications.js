@@ -51,7 +51,13 @@ module.exports = {
             }
         }
         if (choice === "clear") {
-
+            if(!bg) return interaction.editReply({content: "This server have not a boost channel yet! Set one!", ephemeral: true})
+            
+            await boost.findOneAndDelete({ guild: interaction.guild.id }, { guild: interaction.guild.id })
+            
+            interaction.editReply({
+                content: `The Boosting Notification is Disabled!`
+            }).then(() => setTimeout(() => interaction.deleteReply(), 7500))            
         }
 
     }
