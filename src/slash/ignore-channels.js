@@ -39,24 +39,39 @@ module.exports = {
         const channel = interaction.options.getChannel("channel");
         const igg = await ignores.findOne({ guild: interaction.guild.id });
 
-        if(choice === "add-channel") {
-            if(igg.ignored.some(v => v.channel === channel.id)) return interaction.reply({
-                content: "The mentioned channel is already ignored! please add other channel!",
-                ephemeral: true
-            })
+        if (choice === "add-channel") {
+            if (!igg) {
+                new ignores({
+                    guild: interaction.guild.id,
+                    ingored: [{
+                        channel: channel.id
+                    }]
+                }).save();
 
-            igg.ignored.push({ guild: chanel.id });
+                interaction.reply({
+                    content: `The channel have been ignored!`
+                })
 
-            await ignores.findOneAndUpdate({ guild: interaction.guild.id }, {ignored: igg.ignored});
+                return;
+            } else {
+                if (igg.ignored.some(v => v.channel === channel.id)) return interaction.reply({
+                    content: "The mentioned channel is already ignored! please add other channel!",
+                    ephemeral: true
+                })
 
-            interaction.reply({
-                content: `The channel have been ignored!`
-            })
-        } 
-        if(choice === "list") {
+                igg.ignored.push({ guild: chanel.id });
+
+                await ignores.findOneAndUpdate({ guild: interaction.guild.id }, { ignored: igg.ignored });
+
+                interaction.reply({
+                    content: `The channel have been ignored!`
+                })
+            }
+        }
+        if (choice === "list") {
 
         }
-        if(choice === "remove-channel") {
+        if (choice === "remove-channel") {
 
         }
     }
