@@ -9,7 +9,7 @@ module.exports = {
         .setDescription("let the bot skip the channels to don't execute commands there!")
         .addSubcommand(subCommand =>
             subCommand
-                .setTitle("add-channel")
+                .setName("add-channel")
                 .setDescription("add channels to the ignored list!")
                 .addChannelOption(option =>
                     option
