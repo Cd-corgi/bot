@@ -257,8 +257,8 @@ client.on("messageCreate", async (message) => {
 
 //#region event detection
 client.on("guildMemberUpdate", async (oldMember, newMember) => {
-    const oldStatus = oldMember.premiumSince;
-    const newStatus = newMember.premiumSince;
+    const oldStatus = oldMember.premiumSinceTimestamp
+    const newStatus = newMember.premiumSinceTimestamp;
     let bg = await boost.findOne({ guild: newMember.guild.id })
     if (!bg) {
         return;
