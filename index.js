@@ -254,6 +254,18 @@ client.on("messageCreate", async (message) => {
 
 //#endregion event msg
 
+//#region event detection
+client.on("guildMemberUpdate", (oldMember, newMember) => {
+    const oldStatus = oldMember.premiumSince;
+    const newStatus = newMember.premiumSince;
+
+    if(!oldStatus && newStatus) {
+
+    }
+
+})
+//#endregion event detenction
+
 //#region distube core
 const Distube = require('distube')
 const SoundCloudPlugin  = require('@distube/soundcloud');
