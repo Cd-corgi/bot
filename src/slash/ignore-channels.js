@@ -59,7 +59,7 @@ module.exports = {
                     ephemeral: true
                 })
 
-                igg.ignored.push({ guild: chanel.id });
+                igg.ignored.push({ guild: channel.id });
 
                 await ignores.findOneAndUpdate({ guild: interaction.guild.id }, { ignored: igg.ignored });
 
