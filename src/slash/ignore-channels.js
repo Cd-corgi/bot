@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 const Discord = require('discord.js');
-const ignored = require("../models/ignore-channel");
+const ignores = require("../models/ignore-channel");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -37,7 +37,7 @@ module.exports = {
     async run(client, interaction) {
         const choice = interaction.options.getSubcommand();
         const channel = interaction.options.getChannel("channel");
-        const igg = await ignored.findOne({ guild: interaction.guild.id });
+        const igg = await ignores.findOne({ guild: interaction.guild.id });
 
         if(choice === "add-channel") {
             if(igg.ignored.some(v => v.channel === channel.id)) return interaction.reply({
@@ -47,7 +47,7 @@ module.exports = {
 
             igg.ignored.push({ guild: chanel.id });
 
-            await ignored.findOneAndUpdate({ guild: interaction.guild.id }, {ignored: igg.ignored});
+            await ignores.findOneAndUpdate({ guild: interaction.guild.id }, {ignored: igg.ignored});
 
             interaction.reply({
                 content: `The channel have been ignored!`
