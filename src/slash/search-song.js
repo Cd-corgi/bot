@@ -75,5 +75,5 @@ module.exports = {
                 member: interaction.member
             }
         )
-    }
+    } /** */
 }
