@@ -256,26 +256,7 @@ client.on("messageCreate", async (message) => {
 //#endregion event msg
 
 //#region event detection
-client.on("guildMemberUpdate", async (oldMember, newMember) => {
-    let bg = boost.findOne({ guild: newMember.guild.id })
 
-    if (!bg) {
-        return;
-    } else {
-        if(!oldMember.premiumSince && newMember.premiumSince) {
-            const boosted = new Discord.MessageEmbed()
-            .setTitle(`Server Boosting!`)
-            .setDescription(`Someone super dope like ${newMember.user.username} boosted this server!`)
-            .setImage("https://media.giphy.com/media/oCn6eLwzPmWRdHYHaK/giphy.gif")
-            .setColor("FC33FF")
-            .setTimestamp()
-
-            client.channel.cache.get(boost.channel).send({
-                embeds: [boosted]
-            })
-        }
-    }
-})
 //#endregion event detenction
 
 //#region distube core
