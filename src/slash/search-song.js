@@ -41,7 +41,7 @@ module.exports = {
         .setFooter("Wait 30 seconds or type cancel to cancel the election!")
         .setColor("GREEN")
 
-        await interaction.reply({
+        await interaction.channel.send({
             embeds: [queryResult]
         })
 
