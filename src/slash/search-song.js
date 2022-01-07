@@ -41,12 +41,12 @@ module.exports = {
         .setFooter("Wait 30 seconds or type cancel to cancel the election!")
         .setColor("GREEN")
 
-        let msg = await interaction.reply({
+        await interaction.channel.send({
             embeds: [queryResult]
         })
 
         let userinput;
-        const resultC = await msg.awaitMessages({
+        const resultC = await interaction.awaitMessages({
             max: 1,
             time: 60000,
             errors: ["time"],
