@@ -18,7 +18,6 @@ const { prefix } = require('./src/public/config.json');
 const WSchema = require('./src/models/welcome')
 const react = require('./src/models/self-roles')
 const Nospam = require('./src/models/anti-spam')
-const boost = require('./src/models/boost');
 
 
 
