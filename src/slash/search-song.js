@@ -59,19 +59,20 @@ module.exports = {
                     ephemeral: true
                 })
             }
+
+            interaction.reply({
+                content: `Fetching!`
+            }).then(async () => {
+                setTimeout(() => interaction.deleteReply(), 10000)
+            })
         })
 
-        interaction.reply({
-            content: `Fetching!`
-        }).then(async () => {
-            setTimeout(() => interaction.deleteReply(), 10000)
-        })
 
         interaction.client.distube.playVoiceChannel(
             interaction.member.voice.channel,
-            result[userinput - 1],
+            result[userinput - 1].url,
             {
-                textChannel: interaction.channel,
+                textChannel: interaction.channel,   
                 member: interaction.member
             }
         )
