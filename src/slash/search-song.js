@@ -62,7 +62,7 @@ module.exports = {
         })
 
         interaction.reply({
-            content: `Looking for ${result[userinput - 1].name}`
+            content: `Fetching!`
         }).then(async () => {
             setTimeout(() => interaction.deleteReply(), 10000)
         })
