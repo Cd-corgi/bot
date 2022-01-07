@@ -69,7 +69,7 @@ module.exports = {
 
         interaction.client.distube.playVoiceChannel(
             interaction.member.voice.channel,
-            result[userinput - 1].url,
+            result[userinput - 1],
             {
                 textChannel: interaction.channel,
                 member: interaction.member
