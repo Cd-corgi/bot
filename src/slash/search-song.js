@@ -46,7 +46,7 @@ module.exports = {
         })
 
         let userinput;
-        const resultC = await msg.awaitMessages({
+        const resultC = await msg.awaitInteraction({
             max: 1,
             time: 60000,
             errors: ["time"],
