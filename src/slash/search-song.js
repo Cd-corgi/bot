@@ -62,7 +62,7 @@ module.exports = {
 
             let collector = await interaction.channel.createMessageComponentCollector({
                 filter,
-                time: 0,
+                time: 20000,
                 max: 1,
             });
 
@@ -75,6 +75,14 @@ module.exports = {
                         member: interaction.member
                     }
                 )
+            })
+
+            collector.on("end", async (collected) => {
+                interaction.reply({
+                    content: "Search Canceled!",
+                    ephemeral: false
+                })
+                return;
             })
         })
 
