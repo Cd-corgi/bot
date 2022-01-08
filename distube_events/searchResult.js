@@ -1,12 +1,6 @@
 const { MessageEmbed, Client, Message} = require('discord.js');
 
-/**
- * 
- * @param {Client} client 
- * @param {Message} message 
- */
-
-module.exports = (client, message, results) => {
+module.exports = (message, results) => {
     try {
         let query = new MessageEmbed()
         .setDescription(results.map((song, i) => `**${i + 1}** - ${song.name} | \`${song.formattedDuration}\``).join("\n"))
