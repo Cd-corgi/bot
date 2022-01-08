@@ -63,14 +63,6 @@ module.exports = {
 
             collector.on("collect", async (collected) => {
                 client.distube.play(interaction, result[collected.values[0]]?.url);
-                interaction.reply({
-                    content: `Playing ...`,
-                    embeds: [
-                        new Discord.MessageEmbed()
-                        .setDescription(`🎵 **${result[collected.values[0]]?.name}**`)
-                        .setColor("GREEN")
-                    ]
-                }).then(() => setTimeout(() => interaction.deleteREply(), 5000))
             })
         })
 
