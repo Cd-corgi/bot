@@ -78,10 +78,20 @@ module.exports = {
             })
 
             collector.on("end", async (collected) => {
+                
+                let status = " "
+
+                if(collector.size < 1) {
+                    status = "Canceled by Timeout!"
+                } else
+                if(collector.size >= 1) {
+                    status = "Search Done!"
+                }
+                
                 interaction.channel.send({
-                    content: "Search Canceled!",
+                    content: `${status}`,
                     ephemeral: false
-                })
+                }).then(() => setTimeout(() => interaction.delete(), 5000))
                 return;
             })
         })
