@@ -48,7 +48,7 @@ module.exports = {
             ).join("\n");
 
             let row = new Discord.MessageActionRow().addComponents(selector);
-            let msg = await interaction.followUp({
+            let msg = await interaction.channel.send({
                 content: `🔎 **Choose your song below!**`,
                 components: [row]
             })
