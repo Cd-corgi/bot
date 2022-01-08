@@ -267,12 +267,14 @@ client.on("messageCreate", async (message) => {
 const Distube = require('distube')
 const SoundCloudPlugin = require('@distube/soundcloud');
 const SpotifyPlugin = require('@distube/spotify');
+const filters = require('./src/public/filter.json')
 client.distube = new Distube.default(client, {
     leaveOnFinish: true,
     leaveOnEmpty: true,
     searchSongs: 10,
     searchCooldown: 5,
     emptyCooldown: 0,
+    customFilters: filters,
     // plugins: [new SoundCloudPlugin(), new SpotifyPlugin()]
 });
 
