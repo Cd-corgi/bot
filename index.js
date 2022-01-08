@@ -281,14 +281,6 @@ const alone = new Discord.MessageEmbed()
 
 client.distube.on("finish", queue => queue.textChannel.send({ embeds: [fisi] }))
 client.distube.on("empty", queue => queue.textChannel.send({ embeds: [alone] }))
-client.distube.on("searchResult", (message, result, song, args) => {
-    let i = 0
-    message.channel.send('Searching...').then(msg => {
-        msg.edit(`**Choose an option from below**\n${result.map(song => `**${++i}**. ${song.name} - \`${song.formattedDuration}\``).join("\n")}\n*Enter anything else or wait 60 seconds to cancel*`).then(msg => {
-            setTimeout(() => msg.delete(), 15000)
-        })
-    })
-})
 client.distube.on("searchCancel", message => { message.channel.send("Search Canceled!") })
 client.distube.on("searchInvalidAnswer", message => { message.channel.send("Invalid numer of the song!") })
 client.distube.on("searchNoResult", (query, message) => { message.channel.send(`No results for ${query}`) })
