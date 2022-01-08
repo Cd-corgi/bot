@@ -51,21 +51,6 @@ module.exports = {
             let msg = await interaction.reply({
                 content: `🔎 **Choose your song below!**\n Or just wait 20 Second to make this search can be cancelled!`,
                 components: [row]
-            }).then(async (m) => {
-                const react = await m.awaitReactions({
-                    errors: ["time"],
-                    time: 20000,
-                    max: 1,
-                    filter: (r, u) => u.id === interaction.user.id
-                });
-
-                const emoji = react.first()?.emoji;
-
-                if(emoji === "❌") {
-                    m.deleteReply();
-                } else {
-                    return;
-                }
             }).then(() => setTimeout(() => interaction.deleteReply(), 20000))
 
             let filter = (i) => i.user.id === interaction.user.id;
