@@ -271,11 +271,6 @@ client.distube = new Distube.default(client, {
     // plugins: [new SoundCloudPlugin(), new SpotifyPlugin()]
 });
 
-
-client.distube.on("searchCancel", message => { message.channel.send("Search Canceled!") })
-client.distube.on("searchInvalidAnswer", message => { message.channel.send("Invalid numer of the song!") })
-client.distube.on("searchNoResult", (query, message) => { message.channel.send(`No results for ${query}`) })
-client.distube.on("searchDone", message => { message.channel.send(`Fetching ...`) })
 client.distube.on("error", (textChannel, e) => {
     textChannel.send({ content: `:x: | Error: ${e}` })
     console.log(e);
