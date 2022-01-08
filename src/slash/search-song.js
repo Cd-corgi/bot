@@ -33,9 +33,9 @@ module.exports = {
             safeSearch: false,
         }).then(async (result) => {
             const selector = new Discord.MessageSelectMenu();
-                selector.setCustomId("select")
-                selector.setMaxValues(1)
-                selector.setMinValues(1)
+            selector.setCustomId("select")
+            selector.setMaxValues(1)
+            selector.setMinValues(1)
             result.map((song, i) =>
                 selector.addOptions([
                     {
@@ -51,9 +51,9 @@ module.exports = {
             let msg = await interaction.reply({
                 embeds: [
                     new MessageEmbed()
-                    .setDescription(`🔎 Please Select one of the results below!`)
-                    .setFooter("Or just wait for 20 seconds to cancel the searching!")
-                    .setColor("GREEN")
+                        .setDescription(`🔎 Please Select one of the results below!`)
+                        .setFooter("Or just wait for 20 seconds to cancel the searching!")
+                        .setColor("GREEN")
                 ],
                 components: [row]
             }).then(() => setTimeout(() => interaction.deleteReply(), 20000))
@@ -78,21 +78,29 @@ module.exports = {
             })
 
             collector.on("end", async (collected) => {
-                
-                let status = "";
 
-                if(collector.size < 1) {
-                    status = "Canceled by Timeout!"
+
+
+                if (collector.size < 1) {
+                    let status = "Canceled by Timeout!"
+
+                    interaction.channel.send({
+                        content: `${status}`,
+                        ephemeral: false
+                    }).then(() => setTimeout(() => interaction.delete(), 5000))
+                    return;
+
                 } else
-                if(collector.size >= 1) {
-                    status = "Search Done!"
-                }
-                
-                interaction.channel.send({
-                    content: `${status}`,
-                    ephemeral: false
-                }).then(() => setTimeout(() => interaction.delete(), 5000))
-                return;
+                    if (collector.size >= 1) {
+                        let status = "Search Done!"
+
+                        interaction.channel.send({
+                            content: `${status}`,
+                            ephemeral: false
+                        }).then(() => setTimeout(() => interaction.delete(), 5000))
+                        return;
+                    }
+
             })
         })
 
