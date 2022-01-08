@@ -33,7 +33,7 @@ module.exports = {
             safeSearch: false,
         }).then(async (result) => {
             const selector = new Discord.MessageSelectMenu();
-                selector.setCustomID("select")
+                selector.setCustomId("select")
                 selector.setMaxValues(1)
                 selector.setMinValues(1)
             result.map((song, i) =>
