@@ -43,10 +43,12 @@ client.on("ready", async () => {
 //#region unhandled
 process.on('unhandledRejection', error => {
     console.error(`[UNHANDLED ALARM] ${error}`.blue);
+    console.log(error)
 });
 
 client.on('shardError', error => {
     console.error(`[SHARD ALARM] ${error}`.blue);
+    console.log(error)
 });
 //#endregion unhandled
 
