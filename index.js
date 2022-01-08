@@ -266,6 +266,7 @@ client.distube = new Distube.default(client, {
     leaveOnFinish: true,
     leaveOnEmpty: true,
     searchSongs: 10,
+    searchCooldown: 5,
     emptyCooldown: 0,
     // plugins: [new SoundCloudPlugin(), new SpotifyPlugin()]
 });
