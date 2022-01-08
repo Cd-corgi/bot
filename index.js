@@ -26,11 +26,12 @@ client.on("reconnecting", () => {
 client.on("ready", async () => {
     setInterval(() => {
         let status = [
-            "Judy hops never was here 🐰",
-            "R.I.P OtterBot, We'll miss you~",
+            "🎵 Music System!",
+            "We just hopped here!",
+            "❌ No Scam links",
             "✅ Slash Commands Deployed",
-            "Pong! 🏓",
-            "Music Commands Deployed!"
+            "Beta Testing v0.2.10",
+            "Gur abfr vf gur zbfg vzcbegnag gbby!"
         ]
 
         let rand = Math.floor(Math.random() * (status.length - 1) + 1);
