@@ -78,7 +78,7 @@ module.exports = {
             })
 
             collector.on("end", async (collected) => {
-                interaction.reply({
+                interaction.channel.send({
                     content: "Search Canceled!",
                     ephemeral: false
                 })
