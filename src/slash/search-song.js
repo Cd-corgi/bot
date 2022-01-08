@@ -63,6 +63,10 @@ module.exports = {
 
             collector.on("collect", async (collected) => {
                 // client.distube.play(interaction, result[collected.values[0]]?.url);
+                msg.editReply({
+                    content: `Fetching \`${result[collected.values[0]]?.name}\`...`,
+                    components: []
+                }).then(() => setTimeout(() => msg.deleteReply(), 5000))
                 client.distube.playVoiceChannel(
                     interaction.member.voice.channel,
                     result[collected.values[0]]?.url,
