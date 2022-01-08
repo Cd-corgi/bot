@@ -62,7 +62,15 @@ module.exports = {
             });
 
             collector.on("collect", async (collected) => {
-                client.distube.play(interaction, result[collected.values[0]]?.url);
+                // client.distube.play(interaction, result[collected.values[0]]?.url);
+                client.distube.playVoiceChannel(
+                    interaction.member.voice.channel,
+                    result[collected.values[0]]?.url,
+                    {
+                        textChannel: interaction.channel,
+                        member: interaction.member
+                    }
+                )
             })
         })
 
