@@ -49,7 +49,12 @@ module.exports = {
 
             let row = new Discord.MessageActionRow().addComponents(selector);
             let msg = await interaction.reply({
-                content: `🔎 **Choose your song below!**\n Or just wait 20 Second to make this search can be cancelled!`,
+                embeds: [
+                    new MessageEmbed()
+                    .setDescription(`🔎 Please Select one of the results below!`)
+                    .setFooter("Or just wait for 20 seconds to cancel the searching!")
+                    .setColor("GREEN")
+                ],
                 components: [row]
             }).then(() => setTimeout(() => interaction.deleteReply(), 20000))
 
