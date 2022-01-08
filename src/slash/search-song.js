@@ -48,7 +48,7 @@ module.exports = {
             ).join("\n");
 
             let row = new Discord.MessageActionRow().addComponents(selector);
-            let msg = await interaction.reply({
+            let msg = await interaction.followUp({
                 content: `🔎 **Choose your song below!**`,
                 components: [row]
             })
@@ -62,7 +62,6 @@ module.exports = {
             });
 
             collector.on("collect", async (collected) => {
-                msg.deleteReply();
                 client.distube.play(interaction, result[collected.values[0]]?.url);
                 interaction.reply({
                     content: `Playing ...`,
