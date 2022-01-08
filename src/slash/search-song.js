@@ -79,7 +79,7 @@ module.exports = {
 
             collector.on("end", async (collected) => {
                 
-                let status = " "
+                let status = "";
 
                 if(collector.size < 1) {
                     status = "Canceled by Timeout!"
