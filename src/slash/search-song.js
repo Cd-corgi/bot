@@ -55,7 +55,7 @@ module.exports = {
 
             let filter = (i) => i.user.id === interaction.user.id;
 
-            let collector = await interaction.channel.CreateMessageComponentCollector({
+            let collector = await interaction.channel.createMessageComponentCollector({
                 filter,
                 time: 0,
                 max: 1,
