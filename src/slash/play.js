@@ -35,7 +35,7 @@ module.exports = {
             }
         )*/
 
-        interaction.client.distube.play(interaction.member, song)
+        interaction.client.distube.play(client.Discord.Message, song)
 
         interaction.reply({
             content: "🔍 | Fetching the song ...",
