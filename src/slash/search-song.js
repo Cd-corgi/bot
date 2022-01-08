@@ -78,29 +78,11 @@ module.exports = {
             })
 
             collector.on("end", async (collected) => {
-
-
-
-                if (collector.size < 1) {
-                    let status = "Canceled by Timeout!"
-
-                    interaction.channel.send({
-                        content: `${status}`,
-                        ephemeral: false
-                    }).then(() => setTimeout(() => interaction.delete(), 5000))
-                    return;
-
-                } else
-                    if (collector.size >= 1) {
-                        let status = "Search Done!"
-
-                        interaction.channel.send({
-                            content: `${status}`,
-                            ephemeral: false
-                        }).then(() => setTimeout(() => interaction.delete(), 5000))
-                        return;
-                    }
-
+                interaction.channel.send({
+                    content: `Request ended ...`,
+                    ephemeral: false
+                }).then(() => setTimeout(() => interaction.delete(), 5000))
+                return;
             })
         })
 
