@@ -271,10 +271,6 @@ client.distube = new Distube.default(client, {
     // plugins: [new SoundCloudPlugin(), new SpotifyPlugin()]
 });
 
-client.distube.on("error", (textChannel, e) => {
-    textChannel.send({ content: `:x: | Error: ${e}` })
-    console.log(e);
-})
 
 for (const file of readdirSync('./distube_events/')) {
     if (file.endsWith('.js')) {
