@@ -19,7 +19,9 @@ const WSchema = require('./src/models/welcome')
 const react = require('./src/models/self-roles')
 const Nospam = require('./src/models/anti-spam')
 
-
+client.on("reconnecting", () => {
+    client.user.setActivity({activity: `Reconnecting ...`, status: 'idle'})
+})
 
 client.on("ready", async () => {
     setInterval(() => {
