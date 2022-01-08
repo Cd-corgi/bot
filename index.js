@@ -271,17 +271,7 @@ client.distube = new Distube.default(client, {
     // plugins: [new SoundCloudPlugin(), new SpotifyPlugin()]
 });
 
-const fisi = new Discord.MessageEmbed()
-    .setTitle("📤 | leaving Voice Channel. end of Queue!")
-    .setColor("ORANGE")
-    .setFooter("🐰 | Thanks for use Bunny Hops.inc")
 
-const alone = new Discord.MessageEmbed()
-    .setTitle("🚪 | The party is over... no one there!")
-    .setColor("DARK_RED")
-
-client.distube.on("finish", queue => queue.textChannel.send({ embeds: [fisi] }))
-client.distube.on("empty", queue => queue.textChannel.send({ embeds: [alone] }))
 client.distube.on("searchCancel", message => { message.channel.send("Search Canceled!") })
 client.distube.on("searchInvalidAnswer", message => { message.channel.send("Invalid numer of the song!") })
 client.distube.on("searchNoResult", (query, message) => { message.channel.send(`No results for ${query}`) })
