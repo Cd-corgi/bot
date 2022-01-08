@@ -51,7 +51,7 @@ module.exports = {
             let msg = await interaction.reply({
                 content: `🔎 **Choose your song below!**`,
                 components: [row]
-            }).then(() => setTimeout(() => interaction.deleteReply(), 5000))
+            }).then(() => setTimeout(() => interaction.deleteReply(), 10000))
 
             let filter = (i) => i.user.id === interaction.user.id;
 
