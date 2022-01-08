@@ -51,7 +51,7 @@ module.exports = {
             let msg = await interaction.reply({
                 content: `🔎 **Choose your song below!**`,
                 components: [row]
-            })
+            }).then(() => setTimeout(() => interaction.deleteReply(), 5000))
 
             let filter = (i) => i.user.id === interaction.user.id;
 
@@ -62,11 +62,6 @@ module.exports = {
             });
 
             collector.on("collect", async (collected) => {
-                // client.distube.play(interaction, result[collected.values[0]]?.url);
-                msg.editReply({
-                    content: `Fetching \`${result[collected.values[0]]?.name}\`...`,
-                    components: []
-                }).then(() => setTimeout(() => msg.deleteReply(), 5000))
                 client.distube.playVoiceChannel(
                     interaction.member.voice.channel,
                     result[collected.values[0]]?.url,
