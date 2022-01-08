@@ -32,10 +32,10 @@ module.exports = {
             type: "video",
             safeSearch: false,
         }).then(async (result) => {
-            const selector = new Discord.MessageSelectMenu()
-                .setCustomID("select")
-                .setMaxValues(1)
-                .setMinValues(1)
+            const selector = new Discord.MessageSelectMenu();
+                selector.setCustomID("select")
+                selector.setMaxValues(1)
+                selector.setMinValues(1)
             result.map((song, i) =>
                 selector.addOptions([
                     {
