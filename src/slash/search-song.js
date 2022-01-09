@@ -106,7 +106,7 @@ module.exports = {
         if(parseInt(number) > 0 && parseInt(number) <= 10) {
             client.distube.playVoiceChannel(
                 interaction.member.voice.channel,
-                rslts[parseInt(number)-1],
+                rslts[parseInt(number)-1].url,
                 {
                     textChannel: interaction.channel,
                     member: interaction.member,
