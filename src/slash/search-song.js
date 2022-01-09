@@ -121,7 +121,7 @@ module.exports = {
                     member: interaction.member,
                 }
             )
-        } else if(!isNaN(number) || parseInt(number) > 10 && parseInt(number) < 1) {
+        } else if(isNaN(number) || parseInt(number) > 10 && parseInt(number) < 1) {
             return interaction.editReply({
                 embeds: [
                     new MessageEmbed()
