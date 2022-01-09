@@ -27,6 +27,8 @@ module.exports = {
             ephemeral: true
         })
 
+        //#region a
+            /*
         client.distube.search(song, {
             limit: 10,
             type: "video",
@@ -85,6 +87,31 @@ module.exports = {
                 return;
             })
         })
+            */
+        //#endregion a
+    
+        const msg_filter = m => m.id === interaction.user.id;
+        const results = await client.distube.search(song);
+        const rls = results.slice(0, 10)
+        const embedR = new MessageEmbed()
+        .setTitle(`🔎 **Results for ${song}**`)
+        .setColor("GREEN")
+        .setDescription(`${rls.map((song, id) => `**${i + 1}** - ${song.name} | ${song.formattedDuration}`).join("\n")}`)
+        .setFooter("Choose between 1 or 10 to choose your song! Type anything to cancel!")
 
+        interaction.reply({embeds: [embedR]})
+
+        const number = await interaction.channel.awaitMessages({ filter: msg_filter, max: 1 }).then(collected => { return collected.first().content });
+
+        if(parseInt(number) > 0 && parseInt(number) <= 10) {
+            client.distube.playVoiceChannel(
+                interaction.member.voice.channel,
+                rslts[parseInt(number)-1],
+                {
+                    textChannel: interaction.channel,
+                    member: interaction.member,
+                }
+            )
+        }
     }
 }
