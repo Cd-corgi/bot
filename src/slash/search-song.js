@@ -96,7 +96,7 @@ module.exports = {
         const embedR = new MessageEmbed()
         .setTitle(`🔎 **Results for ${song}**`)
         .setColor("GREEN")
-        .setDescription(`${rls.map((song, id) => `**${i + 1}** - ${song.name} | ${song.formattedDuration}`).join("\n")}`)
+        .setDescription(`${rls.map((song, i) => `**${i + 1}** - ${song.name} | ${song.formattedDuration}`).join("\n")}`)
         .setFooter("Choose between 1 or 10 to choose your song! Type anything to cancel!")
 
         interaction.reply({embeds: [embedR]})
