@@ -96,7 +96,7 @@ module.exports = {
         const embedR = new MessageEmbed()
         .setTitle(`🔎 **Results for ${song}**`)
         .setColor("GREEN")
-        .setDescription(`${rls.map((song, i) => `**${i + 1}** - ${song.name} | ${song.formattedDuration}`).join("\n")}`)
+        .setDescription(`${rls.map((song, i) => `**${i + 1}** - ${song.name} | \`${song.formattedDuration}\``).join("\n")}`)
         .setFooter("Choose between 1 or 10 to choose your song! Type anything to cancel!")
 
         interaction.reply({embeds: [embedR]})
@@ -104,6 +104,15 @@ module.exports = {
         const number = await interaction.channel.awaitMessages({ filter: msg_filter, max: 1 }).then(collected => { return collected.first().content });
 
         if(parseInt(number) > 0 && parseInt(number) <= 10) {
+            
+            interaction.editReply({
+                embeds: [
+                    new MessageEmbed()
+                    .setTitle("Playing ...")
+                    .setColor("YELLOW")
+                ]
+            }).then(() => setTimeout(() => interaction.deleteReply(), 5000))
+
             client.distube.playVoiceChannel(
                 interaction.member.voice.channel,
                 rls[parseInt(number)-1],
@@ -112,6 +121,14 @@ module.exports = {
                     member: interaction.member,
                 }
             )
+        } else if(!isNaN(number) || parseInt(number) > 10 && parseInt(number) < 1) {
+            return interaction.editReply({
+                embeds: [
+                    new MessageEmbed()
+                    .setTitle("Search Cancelled!")
+                    .setColor("RED")
+                ]
+            })
         }
     }
 }
