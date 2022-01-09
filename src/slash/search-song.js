@@ -90,7 +90,7 @@ module.exports = {
             */
         //#endregion a
     
-        const msg_filter = m => m.id === interaction.user.id;
+        const msg_filter = m => m.author.id === interaction.user.id;
         const results = await client.distube.search(song);
         const rls = results.slice(0, 10)
         const embedR = new MessageEmbed()
@@ -106,7 +106,7 @@ module.exports = {
         if(parseInt(number) > 0 && parseInt(number) <= 10) {
             client.distube.playVoiceChannel(
                 interaction.member.voice.channel,
-                rls[parseInt(number)-1].url,
+                rls[parseInt(number)-1],
                 {
                     textChannel: interaction.channel,
                     member: interaction.member,
