@@ -348,4 +348,4 @@ client.on("messageCreate", async (message) => {
 
 client.login(token).catch(error => {
     console.log(`${error}`.red);
-});
+}); //a
