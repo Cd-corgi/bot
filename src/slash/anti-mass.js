@@ -73,7 +73,7 @@ module.exports = {
                         .setColor("YELLOW")
 
                     return interaction.reply({
-                        embeds: [enabled]
+                        embeds: [alr1]
                     })
                 }
             } else
