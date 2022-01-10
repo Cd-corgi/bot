@@ -398,6 +398,7 @@ client.on("messageCreate", async (message) => {
                     nmassCount: 1
                 })
                 message.delete();
+                message.reply({ content: "don't send massive messages"})
                 setTimeout(() => {
                     massMessage.delete(message.author.id)
                 }, 3600000)
