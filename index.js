@@ -18,7 +18,6 @@ const { prefix } = require('./src/public/config.json');
 const WSchema = require('./src/models/welcome');
 const react = require('./src/models/self-roles');
 const Nospam = require('./src/models/anti-spam');
-const nmass = require("./src/models/anti-mass");
 
 client.on("reconnecting", () => {
     client.user.setActivity({ activity: `Reconnecting ...`, status: 'idle' })
