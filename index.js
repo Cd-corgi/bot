@@ -364,7 +364,7 @@ client.on("messageCreate", async (message) => {
                     let { nmassCount } = userD;
 
                     nmassCount += 1;
-
+                    console.log(`${nmassCount}`)
                     userD.nmassCount = nmassCount;
 
                     if(nmassCount >= 2) {
@@ -390,7 +390,7 @@ client.on("messageCreate", async (message) => {
 
                     setTimeout(() => {
                         massMessage.delete(message.author.id)
-                    }, 3600000)
+                    }, 10000)
                 }
             } else {
 
@@ -401,7 +401,7 @@ client.on("messageCreate", async (message) => {
                 message.reply({ content: "don't send massive messages"})
                 setTimeout(() => {
                     massMessage.delete(message.author.id)
-                }, 3600000)
+                }, 10000)
             }
         } else {
             return;
