@@ -36,7 +36,7 @@ module.exports = {
 
         if(!bperms) {
             interaction.reply({
-                content: 'I have not the \`KICK_MEMBER\` permissions! Contant the mods/admins to provide me the permission!',
+                content: 'I have not the \`KICK_MEMBERS\` permissions! Contant the mods/admins to provide me the permission!',
                 ephemeral: true
             })
             return;

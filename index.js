@@ -15,12 +15,13 @@ const { token } = require("./src/public/config.json");
 const scam = require('./src/public/scam.json')
 const { ownerID } = require('./src/public/config.json');
 const { prefix } = require('./src/public/config.json');
-const WSchema = require('./src/models/welcome')
-const react = require('./src/models/self-roles')
-const Nospam = require('./src/models/anti-spam')
+const WSchema = require('./src/models/welcome');
+const react = require('./src/models/self-roles');
+const Nospam = require('./src/models/anti-spam');
+const nmass = require("./src/models/anti-mass");
 
 client.on("reconnecting", () => {
-    client.user.setActivity({activity: `Reconnecting ...`, status: 'idle'})
+    client.user.setActivity({ activity: `Reconnecting ...`, status: 'idle' })
 })
 
 client.on("ready", async () => {
@@ -345,6 +346,68 @@ client.on("messageCreate", async (message) => {
 
 })
 //#endregion anti-spam timeout
+
+//#region anti-mass
+
+let massMessage = new Map();
+
+client.on("messageCreate", async (message) => {
+
+    nmass.findOne({ guild: message.guild.id }, async (err, data) => {
+        if (err) throw err;
+        if (data) {
+            let user = message.author;
+
+            if (massMessage.has(message.author.id)) {
+                if (message.content.lenght >= data.wmsg) {
+                    const userD = nmass.get(message.author.id);
+                    let { nmassCount } = userD;
+
+                    nmassCount += 1;
+
+                    userD.nmassCount = nmassCount;
+
+                    if(nmassCount >= 2) {
+                        message.delete()
+                        message.reply({
+                            content: `Please moderate and make short your messages!`,
+                            ephemeral: true
+                        })
+                    }
+
+                    if(nmassCount === 4) {
+                        message.delete();
+                        message.guild.member.chache.find(m => m.id === user.id).kick("Abusing of massive messages!");
+                        const spammed = new Discord.MessageEmbed()
+                        .setTitle("[ANTI-MASSIVE] Someone got kicked!")
+                        .setColor("RED")
+                        .addField("User Kicked", `\`${message.author.username}\``)
+                        .addField("Reason", `\`Abusing of massive messages!\``)
+                        message.channel.send({
+                            embeds: [spammed]
+                        })
+                    }
+
+                    setTimeout(() => {
+                        massMessage.delete(message.author.id)
+                    }, 3600000)
+                }
+            } else {
+
+                massMessage.set(message.author.id, {
+                    nmassCount: 1
+                })
+                setTimeout(() => {
+                    massMessage.delete(message.author.id)
+                }, 3600000)
+            }
+        } else {
+            return;
+        }
+    })
+
+})
+//#endregion anti-mass
 
 client.login(token).catch(error => {
     console.log(`${error}`.red);
