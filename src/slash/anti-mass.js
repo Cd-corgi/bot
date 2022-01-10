@@ -94,10 +94,7 @@ module.exports = {
                                 embeds: [alr2]
                             })
                         } else {
-                            new nmass.findOne({
-                                guild: interaction.guild.id,
-                                wmsg: num
-                            }).save();
+                            await nmass.deleteOne({ guild: interaction.guild.id })
                             const disabled = new MessageEmbed()
                                 .setDescription("The Anti-Mass have been `Disabled`")
                                 .setColor("RED")
