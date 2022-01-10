@@ -397,6 +397,7 @@ client.on("messageCreate", async (message) => {
                 massMessage.set(message.author.id, {
                     nmassCount: 1
                 })
+                message.delete();
                 setTimeout(() => {
                     massMessage.delete(message.author.id)
                 }, 3600000)
