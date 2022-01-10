@@ -347,69 +347,7 @@ client.on("messageCreate", async (message) => {
 })
 //#endregion anti-spam timeout
 
-//#region anti-mass
 
-let massMessage = new Map();
-
-client.on("messageCreate", async (message) => {
-
-    nmass.findOne({ guild: message.guild.id }, async (err, data) => {
-        if (err) throw err;
-        if (data) {
-            let user = message.author;
-
-            if (massMessage.has(message.author.id)) {
-                if (message.content.lenght >= data.wmsg) {
-                    const userD = nmass.get(message.author.id);
-                    let { nmassCount } = userD;
-
-                    nmassCount += 1;
-                    console.log(`${nmassCount}`)
-                    userD.nmassCount = nmassCount;
-
-                    if(nmassCount >= 2) {
-                        message.delete()
-                        message.reply({
-                            content: `Please moderate and make short your messages!`,
-                            ephemeral: true
-                        })
-                    }
-
-                    if(nmassCount === 4) {
-                        message.delete();
-                        message.guild.member.chache.find(m => m.id === user.id).kick("Abusing of massive messages!");
-                        const spammed = new Discord.MessageEmbed()
-                        .setTitle("[ANTI-MASSIVE] Someone got kicked!")
-                        .setColor("RED")
-                        .addField("User Kicked", `\`${message.author.username}\``)
-                        .addField("Reason", `\`Abusing of massive messages!\``)
-                        message.channel.send({
-                            embeds: [spammed]
-                        })
-                    }
-
-                    setTimeout(() => {
-                        massMessage.delete(message.author.id)
-                    }, 10000)
-                }
-            } else {
-
-                massMessage.set(message.author.id, {
-                    nmassCount: 1
-                })
-                message.delete();
-                message.channel.send({ content: "don't send massive messages"})
-                setTimeout(() => {
-                    massMessage.delete(message.author.id)
-                }, 10000)
-            }
-        } else {
-            return;
-        }
-    })
-
-})
-//#endregion anti-mass
 
 client.login(token).catch(error => {
     console.log(`${error}`.red);
