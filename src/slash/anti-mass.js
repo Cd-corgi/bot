@@ -34,7 +34,7 @@ module.exports = {
         var perms = interaction.member.permissions.has("MANAGE_MESSAGES");
         var bperms = interaction.guild.me.permissions.has("MANAGE_MESSAGES");
 
-        if(!perms) {
+        if (!perms) {
             interaction.reply({
                 content: 'You can\'t use this command without "\`MANAGE_MESSAGES\`" permissions!',
                 ephemeral: true
@@ -42,7 +42,7 @@ module.exports = {
             return;
         }
 
-        if(!bperms) {
+        if (!bperms) {
             interaction.reply({
                 content: 'I have not the \`MANAGE_MESSAGES\` permissions! Contant the mods/admins to provide me the permission!',
                 ephemeral: true
@@ -52,51 +52,66 @@ module.exports = {
 
 
         if (choice === "set") {
-            let nmasss = nmass.findOne({ guild: interaction.guild.id });
             if (enna === "on") {
-                if (!nmasss) {
-                    new nmass({
-                        guild: interaction.guild.id,
-                        wmsg: num
-                    }).save();
 
-                    const enabled = new MessageEmbed()
-                        .setDescription("The Anti-Mass have been `Enabled`")
-                        .setColor("GREEN")
-
-                    return interaction.reply({
-                        embeds: [enabled]
-                    })
-                } else {
-                    const alr1 = new MessageEmbed()
-                        .setDescription("The Anti-Mass is already `Enabled`")
-                        .setColor("YELLOW")
-
-                    return interaction.reply({
-                        embeds: [alr1]
-                    })
-                }
-            } else
-                if (enna === "off") {
-                    if (nmasss) {
-                        await nmass.findOneAndDelete({ guild: interaction.guild.id }, { guild: interaction.guild.id });
-
-                        const disabled = new MessageEmbed()
-                            .setDescription("The Anti-Mass have been `Disabled`")
-                            .setColor("RED")
-
-                        return interaction.reply({
-                            embeds: [disabled]
-                        })
-                    } else {
-                        const alr2 = new MessageEmbed()
-                            .setDescription("The Anti-Mass is already `Disabled`")
+                nmass.findOne({ guild: interaction.guild.id }, async (err, data) => {
+                    if (err) throw err;
+                    if (data) {
+                        const alr1 = new MessageEmbed()
+                            .setDescription("The Anti-Mass is already `Enabled`")
                             .setColor("YELLOW")
 
                         return interaction.reply({
-                            embeds: [alr2]
+                            embeds: [alr1]
+                        })
+                    } else {
+                        new nmass({
+                            guild: interaction.guild.id,
+                            wmsg: num
+                        }).save();
+
+                        const enabled = new MessageEmbed()
+                            .setDescription("The Anti-Mass have been `Enabled`")
+                            .setColor("GREEN")
+
+                        return interaction.reply({
+                            embeds: [enabled]
                         })
                     }
+                })
+
+            } else
+                if (enna === "off") {
+
+                    nmass.findOne({ guild: interaction.id }, async (err, data) => {
+                        if (err) throw err;
+                        if (data) {
+                            const alr2 = new MessageEmbed()
+                                .setDescription("The Anti-Mass is already `Disabled`")
+                                .setColor("YELLOW")
+
+                            return interaction.reply({
+                                embeds: [alr2]
+                            })
+                        } else {
+                            new nmass.findOne({
+                                guild: interaction.guild.id,
+                                wmsg: num
+                            }).save();
+                            const disabled = new MessageEmbed()
+                                .setDescription("The Anti-Mass have been `Disabled`")
+                                .setColor("RED")
+
+                            return interaction.reply({
+                                embeds: [disabled]
+                            })
+                        }
+                    })
+
+
+
+
+
                 }
         }
     }
