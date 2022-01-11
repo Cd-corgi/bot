@@ -23,7 +23,7 @@ module.exports = {
             let song = queue.songs[0];
 
             const searches = await Client.songs.search(queue.songs[0].name);
-            const fSong = searchs[0];
+            const fSong = searches[0];
 
             const lyrics = await fSong.lyrics();
 
