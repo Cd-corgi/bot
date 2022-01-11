@@ -3,5 +3,6 @@
     "prefix": "b!",
     "botID": "915958910022746203",
     "ownerID": "451471780977311745",
-    "MONGO": "mongodb+srv://corgiad:corgirules@cluster0.ysfnj.mongodb.net/data"
+    "MONGO": "mongodb+srv://corgiad:corgirules@cluster0.ysfnj.mongodb.net/data",
+    "GENIUS_API": "LD5NMDvT_mkP4nC_rkSJLPQ4O78RQ7LWWe645j2pqOCqAsXYcEKqS0DOLCTp9eFA"
 }

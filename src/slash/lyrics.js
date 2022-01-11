@@ -1,46 +1,54 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 const Discord = require('discord.js');
-const lyricsfinder = require('lyrics-finder')
+const Genius = require('genius-lyrics')
+const { GENIUS_API } = require('../public/config.json')
+const Client = new Genius.Client(GENIUS_API)
 
 module.exports = {
     data: new SlashCommandBuilder()
-    .setName("lyrics")
-    .setDescription("Show the current song!")
-    .addStringOption(option =>
-        option
-        .setName("song")
-        .setDescription("provide the song name to extract their lyrics")
-        .setRequired(true)
-    ),
-    async run(client, interaction){
+        .setName("lyrics")
+        .setDescription("Let the bot find your lyrics!")
+        .addStringOption(option =>
+            option
+                .setName("song-name")
+                .setDescription("Provide the song to search, or search the current song!")
+                .setRequired(false)
+        ),
+    async run(client, interaction) {
+        const query = interaction.options.getString("song-name");
+        const queue = client.distube.getQueue(interaction.member.voice.channel);
 
-        const query = interaction.options.getString("song");
+        if (queue) {
+            let song = queue.songs[0];
 
-        let lyrics = null;
-        
-        try {
-            lyrics = await lyricsfinder(query, "")
-            if(!lyrics) return interaction.reply({ content: "I couldn\'t find any lyrics of the song!" })
-        } catch (error) {
-            return interaction.reply({ content: "I couldn\'t find any lyrics of the song!" })
-        }
+            const searches = await Client.songs.search(queue.songs[0].name);
+            const fSong = searchs[0];
 
-        const ls = new MessageEmbed()
-        .setTitle("Lyrics finder!")
-        .setColor("RANDOM")
-        .setDescription(`\`${query}\`\n${lyrics}`)
-        .setTimestamp()
+            const lyrics = await fSong.lyrics();
 
-        if(lyrics.length > 2048) {
             interaction.reply({
-                content: "Lyrics are too long!",
-                ephemeral: true
-            })
+                embeds: [
+                    new MessageEmbed()
+                        .setTitle(`Looking for lyrics of the current song!`)
+                        .setColor("YELLOW")
+                ]
+            });
+
+            setTimeout(() => {
+                interaction.editReply({
+                    embeds: [
+                        new MessageEmbed()
+                            .setAuthor(`📨 | Lyrics`, song.thumbnail)
+                            .setThumbnail(`${song.thumbnail}`)
+                            .setDescription(`${(lyrics).substring(0, 4096)}`)
+                            .setColor("LUMINOUS_VIVID_PINK")
+                    ]
+                })
+            }, 5000)
+        } else {
+
         }
 
-        interaction.reply({
-            embeds: [ls]
-        })
     }
-} //a
+}
