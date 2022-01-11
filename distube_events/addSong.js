@@ -7,8 +7,8 @@ module.exports = (client, queue, song) => {
     .addField(`Song name:`, `\`${song.name}\``, true)
     .addField(`Duration:`, `\`${song.formattedDuration}\``, true)
     .addField(`Requested by:`, `${song.user}`)
-    .setFooter(`🔇 | i got deafened to make the voice channel be a saafe zone!`)
+    .setFooter(`🔇 | i got deafened to make the voice channel be a safe zone!`)
     queue.textChannel.send({
         embeds: [ss]
-    }).then(m => setTimeout(() => m.delete(), 10000))
+    }).then(m => setTimeout(() => m.delete(), m.deleted, 10000))
 }
