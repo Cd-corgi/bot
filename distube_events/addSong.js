@@ -11,4 +11,4 @@ module.exports = (client, queue, song) => {
     queue.textChannel.send({
         embeds: [ss]
     }).then(m => setTimeout(() => m.delete(), m.deleted, 10000))
-}
+} //a
