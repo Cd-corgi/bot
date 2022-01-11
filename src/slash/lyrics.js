@@ -10,7 +10,6 @@ module.exports = {
         .setName("lyrics")
         .setDescription("Let the bot find your current song's Lyrics"),
     async run(client, interaction) {
-        const query = interaction.options.getString("song-name");
         const queue = client.distube.getQueue(interaction.member.voice.channel);
 
         if (queue) { //only emiting the current song in vc
