@@ -7,6 +7,12 @@ module.exports = {
     .setName("queue")
     .setDescription("Check the server's song queue!"),
     async run(client, interaction){
+
+        if(!interaction.member.voice.channel) return interaction.reply({
+            content: "You should stay in a vc first!",
+            ephemeral: true
+        })
+
         const queue = client.distube.getQueue(interaction.member.voice.channel);
 
         const noqueue = new MessageEmbed()
