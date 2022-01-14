@@ -1,8 +1,8 @@
 {
-    "token": "OTE1OTU4OTEwMDIyNzQ2MjAz.YajLNQ.kKOb-HLCjec8sVxIOYu4m0n1v7Y",
-    "prefix": "b!",
-    "botID": "915958910022746203",
-    "ownerID": "451471780977311745",
-    "MONGO": "mongodb+srv://corgiad:corgirules@cluster0.ysfnj.mongodb.net/data",
-    "GENIUS_API": "LD5NMDvT_mkP4nC_rkSJLPQ4O78RQ7LWWe645j2pqOCqAsXYcEKqS0DOLCTp9eFA"
+    "token": "Discord bot token here",
+    "prefix": "bot's prefix",
+    "botID": "Bot's ID",
+    "ownerID": "owner ID",
+    "MONGO": "mongoose URL here",
+    "GENIUS_API": "GENIUS PAI KEY"
 }
